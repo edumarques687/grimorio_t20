@@ -1,17 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Enhancement(models.Model):
-    cost = models.SmallIntegerField()
+    cost = models.CharField(max_length=20)
     effect = models.TextField()
-    pass
+    related_spell = models.ForeignKey('Spell', on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return 'Related to: ' + self.related_spell.name
 
 
 class Spell(models.Model):
 
-    # id = models.CharField()
-    spell_name = models.CharField()
-    image = models.ImageField(upload_to='spell/images')
+    name = models.TextField()
+    image = models.ImageField(upload_to='spell/images', blank=True)
 
     SPELL_TYPE_CHOICES = [
         ('AR', 'Arcana'),
@@ -19,7 +22,9 @@ class Spell(models.Model):
         ('UN', 'Universal'),
     ]
     spell_type = models.CharField(
+        max_length=2,
         choices=SPELL_TYPE_CHOICES,
+        default='AR',
     )
 
     SCHOOL_CHOICES = [
@@ -33,13 +38,40 @@ class Spell(models.Model):
         ('TR', 'Transmutação'),
     ]
     school = models.CharField(
+        max_length=2,
         choices=SCHOOL_CHOICES,
+        default='AB',
     )
 
-    circle = models.SmallIntegerField()
-    execution = models.CharField()
-    range = models.CharField()
+    CIRCLE_CHOICES = [
+        ('1', 1),
+        ('2', 2),
+        ('3', 3),
+        ('4', 4),
+        ('5', 5),
+    ]
+
+    circle = models.CharField(
+        max_length=1,
+        choices=CIRCLE_CHOICES,
+        default=1,
+    )
+
+    execution = models.TextField()
+    range = models.TextField()
     target_area_effect = models.TextField()
-    duration = models.CharField()
-    resistance = models.CharField(blank=True)
-    pass
+    duration = models.TextField()
+    resistance = models.TextField(blank=True)
+    description = models.TextField(default='')
+    enhancements = models.ManyToManyField(to=Enhancement, related_name='spell', blank=True)
+    short_description = models.CharField(max_length=100, blank=True)
+    book_magazine = models.CharField(max_length=100, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def id(self):
+        return self.id
+
+    def __str__(self):
+        return self.name
+
+

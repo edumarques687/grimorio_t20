@@ -1,0 +1,29 @@
+{% extends './spell_base.html' %}
+{% block content %}
+
+<h1>{{spell.name}} ({{ spell.get_spell_type_display }} {{ spell.circle }})</h1>
+<h6>{{spell.book_magazine}}</h6>
+<h2>{{ spell.get_school_display }}</h2>
+<h4>Execução: </h4>
+{{ spell.execution }}
+<h4>Duração: </h4>
+{{ spell.duration }}
+<h4>Alcance: </h4>
+{{ spell.range }}
+<h4>Alvo/Área/Efeito: </h4>
+{{ spell.target_area_effect }}
+
+{% if spell.resistance != '' %}
+<h4>Resistência: </h4>
+{{ spell.resistance }}
+{% endif %}
+
+<br>
+<br>
+<p>{{ spell.description }}</p>
+{% for enhancement in enhancements %}
+<h6>{{ enhancement.cost }}</h6>
+<p>{{enhancement.effect}}</p>
+{% endfor %}
+
+{% endblock %}

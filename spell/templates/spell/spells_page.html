@@ -1,0 +1,91 @@
+{% extends './spell_base.html' %}
+{% block content %}
+
+<div class="container text-center">
+    <h1>Magias: {{ spells.count }} magia{{ spells.count|pluralize }}</h1>
+
+    <form action="{% url 'spell:spells_page' %}">
+        <label for="spell_type">Tipo: </label>
+        <select name="spell_type">
+            <option value="" selected="selected">Todas</option>
+            <option value="AR">Arcana</option>
+            <option value="DI">Divina</option>
+            <option value="UN">Universal</option>
+        </select><br>
+
+        <label for="school">Escola: </label>
+        <select name="school">
+        <option value="" selected="selected">Todas</option>
+        <option value="AB">Abjuração</option>
+        <option value="AD">Advinhação</option>
+        <option value="CO">Convocação</option>
+        <option value="EN">Encantamento</option>
+        <option value="EV">Evocação</option>
+        <option value="IL">Ilusão</option>
+        <option value="NE">Necromancia</option>
+        <option value="TR">Transmutação</option>
+        </select><br>
+
+        <label for="execution">Execução: </label>
+        <input type="text" id="execution" name="execution"><br>
+        <label for="duration">Duração: </label>
+        <input type="text" id="duration" name="duration"><br>
+        <label for="target_area_effect">Alvo, Área ou Efeito: </label>
+        <input type="text" id="target_area_effect" name="target_area_effect"><br>
+        <label for="resistance">Resistência: </label>
+        <input type="text" id="resistance" name="resistance"><br>
+
+        <label for="school">Origem: </label>
+        <select name="book_magazine">
+            <option value="" selected="selected">Todas</option>
+            <option value="ragão ">Dragão Brasil</option>
+            <option value="Manual Básico">Manual Básico</option>
+        </select><br>
+
+        <input type="submit" value="Filtrar magias" class="btn btn-primary">
+    </form>
+</div>
+
+<div class="row justify-content-center my-3">
+    <div class="col-md-10">
+
+        <form action="{% url 'grimoire:add_spells' %}" method="POST">
+            {% csrf_token %}
+            {% if user_grimoires %}
+            <h2>Selecione seu grimório: </h2>
+            <select name="grimoire_id">
+                {% for grimoire in user_grimoires%}
+                <option value="{{grimoire.id}}">{{grimoire.name}}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <input type="submit" value="Ir!" class="btn btn-primary">
+            {% endif %}
+            <br>
+            {% for c in circles %}
+                <h2>{{ c }}º círculo: </h2>
+                {% for spell in spells %}
+                    {% if spell.circle == c %}
+
+                        <a href="{% url 'spell:spell_details' spell.id %}">
+                            <h2>
+                                {% if user.is_authenticated %}
+                                <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}}>
+                                {% endif %}
+                                {{ spell.name }}
+                            </h2>
+                        </a>
+                        <p>{{ spell.short_description }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+        </form>
+
+
+    </div>
+</div>
+
+
+{% endblock %}
