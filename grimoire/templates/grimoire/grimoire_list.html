@@ -1,28 +1,39 @@
 {% extends 'homepage/base.html' %}
 {% block content %}
 
-<h1>Bem vindo, invocador!</h1>
-<br>
-{% if message != ''%}
-    <h2>{{message}}</h2>
-{% endif %}
-<h2>Selecione seu grimório: </h2>
-<form action="{% url 'grimoire:grimoire_page' %}" method="POST">
-    {% csrf_token %}
-    <select name="grimoire_id">
-        {% for grimoire in user_grimoires%}
-        <option value="{{grimoire.id}}">{{grimoire.name}}</option>
-        {% endfor %}
-    </select><br>
-    <input type="submit" value="Ir!" class="btn btn-primary">
-</form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Bem vindo, invocador!</h1>
+            <br>
+            {% if message != ''%}
+            <h2>{{message}}</h2>
+            {% endif %}
 
-<h2>Ou crie um novo grimório: </h2><br>
-<form action="{% url 'grimoire:grimoire_list' %}" method="POST">
-    {% csrf_token %}
-    <label for="name">Nome do grimório: </label>
-    <input type="text" id="name" name="name"><br>
-    <input type="submit" value="Criar Grimório!" class="btn btn-primary">
-</form>
+            {% csrf_token %}
+            {% if user_grimoires %}
+            <h2>Selecione seu grimório: </h2>
+            <form action="{% url 'grimoire:grimoire_page' %}" method="POST">
+                {% csrf_token %}
+                <select name="grimoire_id">
+                    {% for grimoire in user_grimoires%}
+                    <option value="{{grimoire.id}}">{{grimoire.name}}</option>
+                    {% endfor %}
+                </select><br>
+                <input type="submit" name='action' value="Ir!" class="btn btn-primary">
+                <input type="submit" name='action' value="Excluir" class="btn btn-primary">
+            </form>
+            <h2>Ou</h2>
+            {% endif %}
 
+            <h2>Crie um novo grimório: </h2><br>
+            <form action="{% url 'grimoire:grimoire_list' %}" method="POST">
+                {% csrf_token %}
+                <label for="name">Nome do grimório: </label>
+                <input type="text" id="name" name="name"><br>
+                <input type="submit" value="Criar Grimório!" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

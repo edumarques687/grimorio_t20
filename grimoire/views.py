@@ -26,14 +26,31 @@ def grimoire_list(request):
                 'user_grimoires': user_grimoires, 'message': message})
     return render(request, 'homepage/login.html')
 
+
+@csrf_protect
+def delete_grimoire(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            grimoire = get_object_or_404(Grimoire, pk=request.POST['grimoire_id'])
+            grimoire.delete()
+            user_grimoires = Grimoire.objects.filter(user=request.user).all().order_by('name')
+            return render(request, 'grimoire/grimoire_list.html', {
+                'user_grimoires': user_grimoires, 'message': 'Grimório {} excluído com sucesso!'.format(grimoire.name)})
+        return render(request, 'homepage/login.html')
+
 @csrf_protect
 def grimoire_page(request):
     if request.method == 'POST':
+        if request.POST['action'] == 'Excluir':
+            return delete_grimoire(request)
+
         grimoire = get_object_or_404(Grimoire, pk=request.POST['grimoire_id'])
         spell_list = [val for val in Spell.objects.all() if val in grimoire.spells.all()]
-
         return render(request, 'grimoire/grimoire_page.html', {
-            'grimoire':grimoire, 'spell_list': spell_list, 'circles': ['1', '2', '3', '4', '5']})
+            'grimoire': grimoire, 'spell_list': spell_list,
+            'circles': ['1', '2', '3', '4', '5'],
+            'count': len(spell_list)})
+
 
 @csrf_protect
 def add_spells(request):
