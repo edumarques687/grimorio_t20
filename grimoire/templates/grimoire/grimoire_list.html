@@ -19,18 +19,18 @@
                     {% for grimoire in user_grimoires%}
                     <option value="{{grimoire.id}}">{{grimoire.name}}</option>
                     {% endfor %}
-                </select><br>
+                </select><br><br>
                 <input type="submit" name='action' value="Ir!" class="btn btn-primary">
                 <input type="submit" name='action' value="Excluir" class="btn btn-primary">
             </form>
-            <h2>Ou</h2>
+            <br><h4>Ou</h4><br>
             {% endif %}
 
             <h2>Crie um novo grimório: </h2><br>
             <form action="{% url 'grimoire:grimoire_list' %}" method="POST">
                 {% csrf_token %}
                 <label for="name">Nome do grimório: </label>
-                <input type="text" id="name" name="name"><br>
+                <input type="text" id="name" name="name"><br><br>
                 <input type="submit" value="Criar Grimório!" class="btn btn-primary">
             </form>
         </div>

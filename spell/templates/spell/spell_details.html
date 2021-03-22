@@ -6,23 +6,20 @@
         <div class="col-md-12">
             <div class="row">
                 <h1 style="text-align:center">
-                    {{spell.name}} ({{ spell.get_spell_type_display }} {{ spell.circle }})
+                    {{spell.name}}
                 </h1>
-                <h6 style="text-align:center, color:gray">
+                <h3 style="text-align:center">
+                    ({{ spell.get_spell_type_display }} {{ spell.circle }})
+                </h3>
+
+                <h5 style="text-align:center">
                     {{ spell.get_school_display }}
-                </h6>
+                </h5>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-2">
                     <dl>
-                        <dt>
-                            Publicação:
-
-                        </dt>
-                        <dd>
-                            {{spell.book_magazine}}
-
-                        </dd>
                         <dt>
                             Execução:
 
@@ -59,9 +56,15 @@
                                 nenhuma
                             {% endif %}
                         </dd>
+                        <dt>
+                            Publicação:
+                        </dt>
+                        <dd>
+                            {{spell.book_magazine}}
+                        </dd>
                     </dl>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p>
                         {{ spell.description }}
                     </p>
@@ -72,6 +75,7 @@
                     </p>
                     {% endfor %}
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </div>

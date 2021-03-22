@@ -8,57 +8,58 @@
         </h1>
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
                     <form action="{% url 'spell:spells_page' %}">
-                        <label>Tipo: </label><br>
+                        <label><b>Tipo: </b></label><br>
                         <input type="checkbox" id="Arcana" name="type1" value="AR">
-                        <label for="Arcana">Arcana</label>
+                        <label for="Arcana">Arcana</label><br>
                         <input type="checkbox" id="Divina" name="type2" value="DI">
-                        <label for="Divina">Divina</label>
+                        <label for="Divina">Divina</label><br>
                         <input type="checkbox" id="Universal" name="type3" value="UN">
-                        <label for="Universal">Universal</label>
+                        <label for="Universal">Universal</label><br>
                         <br>
 
-                        <label>Escola: </label><br>
+                        <label><b>Escola: </b></label><br>
                         <input type="checkbox" id="AB" name="school1" value="AB">
-                        <label for="AB">Abjuração</label>
+                        <label for="AB">Abjuração</label><br>
                         <input type="checkbox" id="AD" name="school2" value="AD">
-                        <label for="AD">Advinhação</label>
+                        <label for="AD">Advinhação</label><br>
                         <input type="checkbox" id="CO" name="school3" value="CO">
-                        <label for="CO">Convocação</label>
+                        <label for="CO">Convocação</label><br>
                         <input type="checkbox" id="EN" name="school4" value="EN">
-                        <label for="EN">Encantamento</label>
+                        <label for="EN">Encantamento</label><br>
                         <input type="checkbox" id="EV" name="school5" value="EV">
-                        <label for="EV">Evocação</label>
+                        <label for="EV">Evocação</label><br>
                         <input type="checkbox" id="IL" name="school6" value="IL">
-                        <label for="IL">Ilusão</label>
+                        <label for="IL">Ilusão</label><br>
                         <input type="checkbox" id="NE" name="school7" value="NE">
-                        <label for="NE">Necromancia</label>
+                        <label for="NE">Necromancia</label><br>
                         <input type="checkbox" id="TR" name="school8" value="TR">
-                        <label for="AB">Transmutação</label>
+                        <label for="AB">Transmutação</label><br>
                         <br>
 
-                        <label for="execution">Execução: </label>
+                        <label for="execution"><b>Execução: </b></label>
                         <input type="text" id="execution" name="execution"><br>
-                        <label for="duration">Duração: </label>
+                        <label for="duration"><b>Duração: </b></label>
                         <input type="text" id="duration" name="duration"><br>
-                        <label for="target_area_effect">Alvo, Área ou Efeito: </label>
+                        <label for="target_area_effect"><b>Alvo, Área ou Efeito: </b></label>
                         <input type="text" id="target_area_effect" name="target_area_effect"><br>
-                        <label for="resistance">Resistência: </label>
+                        <label for="resistance"><b>Resistência: </b></label>
                         <input type="text" id="resistance" name="resistance"><br>
 
-                        <label>Origem: </label>
+                        <label><b>Publicação: </b></label>
                         <select name="book_magazine">
                             <option value="" selected="selected">Todas</option>
                             {% for origin in origins %}
                             <option value="{{origin}}">{{origin}}</option>
                             {% endfor %}
-                        </select><br>
+                        </select><br><br>
 
                         <input type="submit" value="Filtrar magias" class="btn btn-primary">
                     </form>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <form action="{% url 'grimoire:add_spells' %}" method="POST">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
@@ -97,6 +98,7 @@
 
                     </form>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </div>

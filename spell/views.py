@@ -14,7 +14,6 @@ def spell_page(request):
         query &= Q()
         type_filters = ['AR', 'DI', 'UN']
         school_filters = ['AB', 'AD', 'CO', 'EN', 'EV', 'IL', 'NE', 'TR']
-        query_type = ['']
         for key, value in request.GET.items():
             if value != '':
                 if 'type' in key and value != '':
@@ -22,6 +21,7 @@ def spell_page(request):
                         query |= Q(spell_type__icontains=value)
         spells = Spell.objects.filter(query).all()
         query = Q()
+
         for key, value in request.GET.items():
             if value != '':
                 if 'school' in key and value != '':
