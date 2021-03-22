@@ -11,6 +11,7 @@ def spell_page(request):
     spells = Spell.objects.order_by('name').all()
     if request.method == 'GET':
         query = Q()
+        query &= Q()
         type_filters = ['AR', 'DI', 'UN']
         school_filters = ['AB', 'AD', 'CO', 'EN', 'EV', 'IL', 'NE', 'TR']
         query_type = ['']
@@ -19,6 +20,10 @@ def spell_page(request):
                 if 'type' in key and value != '':
                     if any(value in s for s in type_filters):
                         query |= Q(spell_type__icontains=value)
+        spells = Spell.objects.filter(query).all()
+        query = Q()
+        for key, value in request.GET.items():
+            if value != '':
                 if 'school' in key and value != '':
                     if any(value in s for s in school_filters):
                         query |= Q(school__icontains=value)
@@ -34,13 +39,13 @@ def spell_page(request):
                     query &= Q(book_magazine__icontains=value)
                 print(query)
 
-        spells = Spell.objects.filter(query).all()
+        spells = spells.filter(query).all()
         origins = []
         for spell in spells:
             spell_origin = spell.book_magazine
             if spell_origin not in origins:
                 origins.append(spell_origin)
-    return render(request, 'spell/spells_page.html', {'spells': spells,
+        return render(request, 'spell/spells_page.html', {'spells': spells,
                                                       'circles': ['1', '2', '3', '4', '5'],
                                                       'user_grimoires': user_grimoires,
                                                       'origins': origins})

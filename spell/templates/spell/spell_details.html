@@ -1,29 +1,80 @@
 {% extends './spell_base.html' %}
 {% block content %}
 
-<h1>{{spell.name}} ({{ spell.get_spell_type_display }} {{ spell.circle }})</h1>
-<h6>{{spell.book_magazine}}</h6>
-<h2>{{ spell.get_school_display }}</h2>
-<h4>Execução: </h4>
-{{ spell.execution }}
-<h4>Duração: </h4>
-{{ spell.duration }}
-<h4>Alcance: </h4>
-{{ spell.range }}
-<h4>Alvo/Área/Efeito: </h4>
-{{ spell.target_area_effect }}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <h1 style="text-align:center">
+                    {{spell.name}} ({{ spell.get_spell_type_display }} {{ spell.circle }})
+                </h1>
+                <h6 style="text-align:center, color:gray">
+                    {{ spell.get_school_display }}
+                </h6>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <dl>
+                        <dt>
+                            Publicação:
 
-{% if spell.resistance != '' %}
-<h4>Resistência: </h4>
-{{ spell.resistance }}
-{% endif %}
+                        </dt>
+                        <dd>
+                            {{spell.book_magazine}}
 
-<br>
-<br>
-<p>{{ spell.description }}</p>
-{% for enhancement in enhancements %}
-<h6>{{ enhancement.cost }}</h6>
-<p>{{enhancement.effect}}</p>
-{% endfor %}
+                        </dd>
+                        <dt>
+                            Execução:
+
+                        </dt>
+                        <dd>
+                            {{ spell.execution }}
+
+                        </dd>
+                        <dt>
+                            Duração:
+                        </dt>
+                        <dd>
+                            {{ spell.duration }}
+                        </dd>
+                        <dt>
+                            Alcance:
+                        </dt>
+                        <dd>
+                            {{ spell.range }}
+                        </dd>
+                        <dt>
+                            Alvo/Área/Efeito:
+                        </dt>
+                        <dd>
+                            {{ spell.target_area_effect }}
+                        </dd>
+                        <dt>
+                            Resistência:
+                        </dt>
+                        <dd>
+                            {% if spell.resistance != '' %}
+                                {{ spell.resistance }}
+                            {% else %}
+                                nenhuma
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        {{ spell.description }}
+                    </p>
+                    {% for enhancement in enhancements %}
+                    <p>
+                        <b style="color:red">{{ enhancement.cost }}:</b>
+                        {{enhancement.effect}}
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
