@@ -18,6 +18,19 @@
             </p>
             <h3>
                 <a href="{% url 'spell:spells_page' %}"><h3 style="text-align:center">Lista de Magias</h3></a>
+                {% if user.is_authenticated %}
+                    <a class="nav-link active" href="{% url 'grimoire:grimoire_list' %}"><h3 style="text-align:center">Seus Grimórios</h3></a>
+                    <h3 style="text-align:center">{{ user.username }}</h3>
+                    <form action="{% url 'logoutuser' %}" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <button type="submit" style="margin:auto; display:block">Sair</button>
+                        </div>
+                    </form>
+                {% else %}
+                <a class="nav-link active" href="{% url 'signupuser' %}"><h3 style="text-align:center">Sign Up</h3></a>
+                <a class="nav-link active" href="{% url 'loginuser' %}"><h3 style="text-align:center">Login</h3></a>
+                {% endif %}
             </h3>
         </div>
     </div>
