@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Enhancement(models.Model):
-    cost = models.CharField(max_length=20)
+    cost = models.CharField(max_length=30)
     effect = models.TextField()
     related_spell = models.ForeignKey('Spell', on_delete=models.CASCADE, default=None)
 
