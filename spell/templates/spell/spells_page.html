@@ -72,17 +72,17 @@
                     <form action="{% url 'grimoire:add_spells' %}" method="POST">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
-                            {% if user_grimoires %}
-                                <h2>Selecione seu grimório: </h2>
-                                <select name="grimoire_id">
-                                    {% for grimoire in user_grimoires%}
-                                    <option value="{{grimoire.id}}">{{grimoire.name}}</option>
-                                    {% endfor %}
-                                </select>
+                        {% if user_grimoires %}
+                        <h2>Selecione seu grimório: </h2>
+                        <select name="grimoire_id">
+                            {% for grimoire in user_grimoires%}
+                            <option value="{{grimoire.id}}">{{grimoire.name}}</option>
+                            {% endfor %}
+                        </select>
 
 
-                                <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
-                                {% endif %}
+                        <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
+                        {% endif %}
                         {% endif %}
                         <br>
                         {% for c in circles %}
@@ -93,9 +93,9 @@
                         <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
                             <h5>
                                 {% if user.is_authenticated %}
-                                    {% if user_grimoires %}
-                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
-                                    {% endif %}
+                                {% if user_grimoires %}
+                                <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
+                                {% endif %}
                                 {% endif %}
                                 {{ spell.name }}
                             </h5>
