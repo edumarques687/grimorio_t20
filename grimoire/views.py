@@ -13,6 +13,8 @@ def grimoire_list(request):
     if request.method == "POST":
         if request.POST['name'] == '':
             message = 'Defina um nome para seu grimório de magias ;)'
+        elif len(request.POST['name']) > 100:
+            message = 'O nome informado é grande demais ;)'
         else:
             form = GrimoireForm(request.POST)
             new_grimoire = form.save(commit=False)

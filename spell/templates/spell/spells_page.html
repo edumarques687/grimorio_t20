@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3">
+                <div class="col-md-3" style="display: table">
                     <form action="{% url 'spell:spells_page' %}">
                         <label><b>Tipo: </b></label><br>
                         <input type="checkbox" id="Arcana" name="type1" value="AR">
@@ -39,17 +39,17 @@
                         <label for="AB">Transmutação</label><br>
                         <br>
 
-                        <label for="execution"><b>Execução: </b></label>
-                        <input type="text" id="execution" name="execution"><br>
+                        <label for="execution" style="display:table-cell; width:1px"><b>Execução: </b></label>
+                        <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
                         <label for="duration"><b>Duração: </b></label>
-                        <input type="text" id="duration" name="duration"><br>
+                        <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
                         <label for="target_area_effect"><b>Alvo, Área ou Efeito: </b></label>
-                        <input type="text" id="target_area_effect" name="target_area_effect"><br>
+                        <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"><br>
                         <label for="resistance"><b>Resistência: </b></label>
-                        <input type="text" id="resistance" name="resistance"><br>
+                        <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
 
                         <label><b>Publicação: </b></label>
-                        <select name="book_magazine">
+                        <select name="book_magazine" style="display:table-cell; width:100%">
                             <option value="" selected="selected">Todas</option>
                             {% for origin in origins %}
                             <option value="{{origin}}">{{origin}}</option>
@@ -85,7 +85,7 @@
                             <h4>
                                 {% if user.is_authenticated %}
                                     {% if user_grimoires %}
-                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}}>
+                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:25px;width:25px">
                                     {% endif %}
                                 {% endif %}
                                 {{ spell.name }}

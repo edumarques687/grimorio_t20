@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Grimoire(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     spells = models.ManyToManyField(to=Spell, related_name='grimoire', blank=True)
 
