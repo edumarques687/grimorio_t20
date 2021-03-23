@@ -1,65 +1,74 @@
 {% extends './spell_base.html' %}
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row">
-        <h1 style="text-align:center">
-            Magias: {{ spells.count }}
-        </h1>
         <div class="col-md-12">
+            <div class="row" style="padding-top:15px"></div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3" style="display: table">
-                    <form action="{% url 'spell:spells_page' %}">
-                        <label><b>Tipo: </b></label><br>
-                        <input type="checkbox" id="Arcana" name="type1" value="AR">
-                        <label for="Arcana">Arcana</label><br>
-                        <input type="checkbox" id="Divina" name="type2" value="DI">
-                        <label for="Divina">Divina</label><br>
-                        <input type="checkbox" id="Universal" name="type3" value="UN">
-                        <label for="Universal">Universal</label><br>
-                        <br>
+                <div class="col-md-3 rounded-left" style="background-color:#F5F5F5"></div>
+                <div class="col-md-3 rounded-right" style="background-color:#F5F5F5;padding-top: 15px"></div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3" style="background-color:#F5F5F5">
+                    <div class="col-md-12 rounded" style="display: table; background-color:#ccc;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                        <form action="{% url 'spell:spells_page' %}">
+                            <h2 style="text-align:center">
+                                Magias encontradas: {{ spells.count }}
+                            </h2>
+                            <label><b>Tipo: </b></label><br>
+                            <input type="checkbox" id="Arcana" name="type1" value="AR">
+                            <label for="Arcana">Arcana</label><br>
+                            <input type="checkbox" id="Divina" name="type2" value="DI">
+                            <label for="Divina">Divina</label><br>
+                            <input type="checkbox" id="Universal" name="type3" value="UN">
+                            <label for="Universal">Universal</label><br>
+                            <br>
 
-                        <label><b>Escola: </b></label><br>
-                        <input type="checkbox" id="AB" name="school1" value="AB">
-                        <label for="AB">Abjuração</label><br>
-                        <input type="checkbox" id="AD" name="school2" value="AD">
-                        <label for="AD">Advinhação</label><br>
-                        <input type="checkbox" id="CO" name="school3" value="CO">
-                        <label for="CO">Convocação</label><br>
-                        <input type="checkbox" id="EN" name="school4" value="EN">
-                        <label for="EN">Encantamento</label><br>
-                        <input type="checkbox" id="EV" name="school5" value="EV">
-                        <label for="EV">Evocação</label><br>
-                        <input type="checkbox" id="IL" name="school6" value="IL">
-                        <label for="IL">Ilusão</label><br>
-                        <input type="checkbox" id="NE" name="school7" value="NE">
-                        <label for="NE">Necromancia</label><br>
-                        <input type="checkbox" id="TR" name="school8" value="TR">
-                        <label for="AB">Transmutação</label><br>
-                        <br>
+                            <label><b>Escola: </b></label><br>
+                            <input type="checkbox" id="AB" name="school1" value="AB">
+                            <label for="AB">Abjuração</label><br>
+                            <input type="checkbox" id="AD" name="school2" value="AD">
+                            <label for="AD">Advinhação</label><br>
+                            <input type="checkbox" id="CO" name="school3" value="CO">
+                            <label for="CO">Convocação</label><br>
+                            <input type="checkbox" id="EN" name="school4" value="EN">
+                            <label for="EN">Encantamento</label><br>
+                            <input type="checkbox" id="EV" name="school5" value="EV">
+                            <label for="EV">Evocação</label><br>
+                            <input type="checkbox" id="IL" name="school6" value="IL">
+                            <label for="IL">Ilusão</label><br>
+                            <input type="checkbox" id="NE" name="school7" value="NE">
+                            <label for="NE">Necromancia</label><br>
+                            <input type="checkbox" id="TR" name="school8" value="TR">
+                            <label for="AB">Transmutação</label><br>
+                            <br>
 
-                        <label for="execution" style="display:table-cell; width:1px"><b>Execução: </b></label>
-                        <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
-                        <label for="duration"><b>Duração: </b></label>
-                        <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
-                        <label for="target_area_effect"><b>Alvo, Área ou Efeito: </b></label>
-                        <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"><br>
-                        <label for="resistance"><b>Resistência: </b></label>
-                        <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
+                            <label for="execution" style="display:table-cell; width:1px"><b>Execução: </b></label>
+                            <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
+                            <label for="duration"><b>Duração: </b></label>
+                            <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
+                            <label for="target_area_effect"><b>Alvo, Área ou Efeito: </b></label>
+                            <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"><br>
+                            <label for="resistance"><b>Resistência: </b></label>
+                            <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
 
-                        <label><b>Publicação: </b></label>
-                        <select name="book_magazine" style="display:table-cell; width:100%">
-                            <option value="" selected="selected">Todas</option>
-                            {% for origin in origins %}
-                            <option value="{{origin}}">{{origin}}</option>
-                            {% endfor %}
-                        </select><br><br>
+                            <label><b>Publicação: </b></label>
+                            <select name="book_magazine" style="display:table-cell; width:100%">
+                                <option value="" selected="selected">Todas</option>
+                                {% for origin in origins %}
+                                <option value="{{origin}}">{{origin}}</option>
+                                {% endfor %}
+                            </select><br><br>
 
-                        <input type="submit" value="Filtrar magias" class="btn btn-primary">
-                    </form>
+                            <input type="submit" value="Filtrar magias" class="btn btn-primary"><br>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" style="background-color:#F5F5F5;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
                     <form action="{% url 'grimoire:add_spells' %}" method="POST">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
@@ -72,7 +81,7 @@
                                 </select>
 
 
-                                <input type="submit" value="Adicionar magias" class="btn btn-primary">
+                                <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
                                 {% endif %}
                         {% endif %}
                         <br>
@@ -81,17 +90,16 @@
                         {% for spell in spells %}
                         {% if spell.circle == c %}
 
-                        <a href="{% url 'spell:spell_details' spell.id %}">
-                            <h4>
+                        <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
+                            <h5>
                                 {% if user.is_authenticated %}
                                     {% if user_grimoires %}
-                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:25px;width:25px">
+                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
                                     {% endif %}
                                 {% endif %}
                                 {{ spell.name }}
-                            </h4>
+                            </h5>
                         </a>
-                        <p>{{ spell.short_description }}</p>
                         {% endif %}
                         {% endfor %}
                         {% endfor %}
