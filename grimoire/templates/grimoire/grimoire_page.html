@@ -9,23 +9,22 @@
         <div class="col-md-3">
         </div>
         <div class="col-md-6 rounded" style="background-color:#F5F5F5">
+            {% for c in circles %}
+            <h2>{{ c }}º círculo: </h2>
+            {% for spell in spell_list %}
+            {% if spell.circle == c %}
             <form action="{% url 'grimoire:remove_spell' %}" method="POST">
-                {% for c in circles %}
-                <h2>{{ c }}º círculo: </h2>
-                {% for spell in spell_list %}
-                {% if spell.circle == c %}
-                {% csrf_token %}
                 <input type="hidden" name="grimoire_id" value='{{ grimoire.id }}'>
                 <input type="hidden" name="spell" value='{{ spell.id }}'>
+                {% csrf_token %}
                 <a href="{% url 'spell:spell_details' spell.id %}">
                     <h4><input type="submit" value="Remover" class="btn btn-danger" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>
                 </a>
                 <p>{{ spell.short_description }}</p>
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
-
             </form>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
         </div>
         <div class="col-md-3">
         </div>
