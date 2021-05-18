@@ -27,6 +27,11 @@ def spell_page(request):
                 if 'school' in key and value != '':
                     if any(value in s for s in school_filters):
                         query |= Q(school__icontains=value)
+                if key == 'keyword' and value != '':
+                    kw_list = value.split(';')
+                    for kw in kw_list:
+                        query |= Q(description__icontains=kw)
+                        query |= Q(enhancement__effect__icontains=kw)
                 if key == 'execution' and value != '':
                     query &= Q(execution__icontains=value)
                 if key == 'duration' and value != '':
@@ -39,7 +44,7 @@ def spell_page(request):
                     query &= Q(book_magazine__icontains=value)
                 print(query)
 
-        spells = spells.filter(query).all()
+        spells = spells.filter(query).distinct()
         origins = []
         for spell in spells:
             spell_origin = spell.book_magazine
