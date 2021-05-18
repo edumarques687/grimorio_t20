@@ -6,8 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        {% if spell.name %}
+        <title>{{spell.name}}</title>
+        {% else %}
         <title>Grimório T20</title>
+        {% endif %}
         <meta name="description" content="Uma lista de fácil acesso de magias para Tormenta 20.">
+        {% load static %}
+        <link rel="icon" type="image/png" href="{% static 'img/olho_grimorio.png' %}">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
