@@ -1,38 +1,155 @@
 {% extends 'homepage/base.html' %}
 {% block content %}
+
+        <style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBoldItalic';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 400%
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 200%
+            }
+
+            .t20 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                font-size: 130%
+            }
+
+            h3 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #B6992A;
+                font-variant: small-caps;
+            }
+
+            h5 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #d13235;
+                font-variant: small-caps;
+            }
+
+            body {
+                background-image: url("/static/img/bg_1.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bld{
+                font-family: 'iowanOldStyleBold';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 110%;
+                font-variant: small-caps;
+            }
+
+            label{
+                font-family: 'iowanOldStyleRegular';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+
+            p{
+                font-family: 'iowanOldStyleRegular';
+                color: black;
+                font-weight: normal;
+                font-style: normal;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        </style>
+
 <div class="container-fluid">
+    <div class="row" style="padding-top:30px"></div>
     <div class="row">
-        <div class="col-md-12">
-            <br><img width="100%" height="auto" style="max-width:1000px" alt="Tormenta 20" src="https://jamboeditora.com.br/app/uploads/2020/11/jamboeditora-artigo-t20.jpg" class="d-inline-block align-top" />
+        <div class="col-md-3"> </div>
+        <div class="col-md-6 bg_image">
+<!--            <br><img width="100%" height="auto" style="max-width:1000px" alt="Tormenta 20" src="https://jamboeditora.com.br/app/uploads/2020/11/jamboeditora-artigo-t20.jpg" class="d-inline-block align-top" />-->
             <h1>
                 Grimório Tormenta 20
             </h1>
             <p>
-                Olá,<br>Este é um projeto pessoal para criar um Grimório para <strong>Tormenta 20</strong>.
-                Através dele, você poderá consultar filtrar a lista de todas as magias já lançadas no sistema,
-                assim como criar listas próprias.<br><br>
+                Olá,<br><br>Este é um projeto pessoal para criar um Grimório para <strong class="t20">Tormenta 20</strong>.
+                Através dele, você poderá consultar e filtrar a lista de todas as magias já lançadas no sistema,
+                assim como criar listas próprias <small>(necessário logar)</small>.<br><br>
                 Devo salientar que este projeto <strong>AINDA ESTÁ EM DESENVOLVIMENTO</strong>, então pode esperar
                 uma repaginada no visual de vez em quando.<br><br>
-                Se você encontrou algum erro, uma magia faltando, ou tem uma sugestão, por favor, me envie por e-mail
+                Se você tem uma sugestão, encontrou algum erro ou magia faltando, por favor, me envie por e-mail
                 para <em>ermm.rs@gmail.com</em> que vou adicionar/corrigir assim que possível.
             </p>
             <h3>
-                <a href="{% url 'spell:spells_page' %}"><h3 style="text-align:center">Lista de Magias</h3></a>
+                <a href="{% url 'spell:spells_page' %}" style="text-align:center; color:inherit;text-decoration:none"><h2>Lista de Magias</h2></a>
                 {% if user.is_authenticated %}
-                    <a class="nav-link active" href="{% url 'grimoire:grimoire_list' %}"><h3 style="text-align:center">Seus Grimórios</h3></a>
+                    <a class="nav-link active" href="{% url 'grimoire:grimoire_list' %}" style="text-align:center; color:inherit;text-decoration:none"><h3>Seus Grimórios</h3></a>
                     <h3 style="text-align:center">{{ user.username }}</h3>
                     <form action="{% url 'logoutuser' %}" method="POST">
                         {% csrf_token %}
                         <div>
-                            <button type="submit" style="margin:auto; display:block">Sair</button>
+                            <button class="btn btn-primary" type="submit" style="margin:auto; display:block">Sair</button>
                         </div>
                     </form>
                 {% else %}
-                <a class="nav-link active" href="{% url 'signupuser' %}"><h3 style="text-align:center">Sign Up</h3></a>
-                <a class="nav-link active" href="{% url 'loginuser' %}"><h3 style="text-align:center">Login</h3></a>
+                <a class="nav-link active" href="{% url 'signupuser' %}" style="text-align:center; color:inherit;text-decoration:none"><h3 >Sign Up</h3></a>
+                <a class="nav-link active" href="{% url 'loginuser' %}" style="text-align:center; color:inherit;text-decoration:none"><h3>Login</h3></a>
                 {% endif %}
             </h3>
+            <div class="row" style="padding-bottom:30px"></div>
         </div>
+        <div class="col-md-3"> </div>
     </div>
 </div>
 {% endblock %}

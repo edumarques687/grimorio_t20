@@ -1,0 +1,4 @@
+Tamanho da página: 205mm x 275mm
+Margens: Superior 20mm Inferior 24 mm Interna 25 mm Externa 18mm
+Transparência do BG 75%
+Recomendo incluir, no final do documento, um parágrafo dizendo o seguinte: "Este conteúdo é um material gratuito não-oficial, feito por fãs, sem aprovação ou orientação da Jambô Editora, e sem fins lucrativos. Parte do material utilizado é propriedade da Jambô Editora."

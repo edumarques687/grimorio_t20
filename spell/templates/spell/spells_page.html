@@ -1,25 +1,112 @@
 {% extends './spell_base.html' %}
 {% block content %}
 
+        <style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBoldItalic';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235
+            }
+
+            h3 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #f0dc82;
+                font-variant: small-caps;
+            }
+
+            h5 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #d13235;
+                font-variant: small-caps;
+            }
+
+            body {
+                background-image: url("/static/img/bg_2.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bld{
+                font-family: 'iowanOldStyleBold';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 110%;
+                font-variant: small-caps;
+            }
+
+            label{
+                font-family: 'iowanOldStyleRegular';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+        </style>
+
 <div class="container-fluid" >
     <div class="row">
         <div class="col-md-12">
             <div class="row" style="padding-top:15px"></div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3 rounded-left" style="background-color:#F5F5F5"></div>
-                <div class="col-md-3 rounded-right" style="background-color:#F5F5F5;padding-top: 15px"></div>
+                <div class="col-md-6 bg_image" style="padding-top: 13px"></div>
                 <div class="col-md-3"></div>
             </div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3" style="background-color:#F5F5F5">
-                    <div class="col-md-12 rounded" style="display: table; background-color:#E0E0E0;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+
+                <div class="col-md-3 bg_image">
+                    <div class="col-md-12" style="display: table; background-color:#B62E34;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
                         <form action="{% url 'spell:spells_page' %}">
-                            <h2 style="text-align:center">
+                            <h3 style="text-align:left">
                                 Magias encontradas: {{ spells.count }}
-                            </h2>
-                            <label><b>Tipo: </b></label><br>
+                            </h3>
+                            <label class="bld"><b>Tipo: </b></label><br>
                             <input type="checkbox" id="Arcana" name="type1" value="AR" style="height:15px;width:15px;">
                             <label for="Arcana">Arcana</label><br>
                             <input type="checkbox" id="Divina" name="type2" value="DI" style="height:15px;width:15px;">
@@ -28,7 +115,7 @@
                             <label for="Universal">Universal</label><br>
                             <br>
 
-                            <label><b>Escola: </b></label><br>
+                            <label class="bld"><b>Escola: </b></label><br>
                             <input type="checkbox" id="AB" name="school1" value="AB" style="height:15px;width:15px;">
                             <label for="AB">Abjuração</label><br>
                             <input type="checkbox" id="AD" name="school2" value="AD" style="height:15px;width:15px;">
@@ -47,18 +134,18 @@
                             <label for="AB">Transmutação</label><br>
                             <br>
 
-                            <label for="keyword"><b>Palavras-chave: (separe com ';')</b></label>
+                            <label class="bld" for="keyword">Palavras-chave: (separe com ';')</label>
                             <input type="text" id="keyword" name="keyword" style="display:table-cell; width:100%"><br>
-                            <label for="execution"><b>Execução: </b></label>
+                            <label class="bld" for="execution">Execução: </label>
                             <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
-                            <label for="duration"><b>Duração: </b></label>
+                            <label class="bld" for="duration">Duração: </label>
                             <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
-                            <label for="target_area_effect"><b>Alvo, Área ou Efeito: </b></label>
+                            <label class="bld" for="target_area_effect">Alvo, Área ou Efeito: </label>
                             <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"><br>
-                            <label for="resistance"><b>Resistência: </b></label>
+                            <label class="bld" for="resistance">Resistência: </label>
                             <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
 
-                            <label><b>Publicação: </b></label>
+                            <label class="bld" >Publicação: </label>
                             <select name="book_magazine" style="display:table-cell; width:100%">
                                 <option value="" selected="selected">Todas</option>
                                 {% for origin in origins %}
@@ -70,7 +157,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-3" style="background-color:#F5F5F5;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                <div class="col-md-3 bg_image" style="padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
                     <form action="{% url 'grimoire:add_spells' %}" method="POST">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
@@ -86,9 +173,10 @@
                         <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
                         {% endif %}
                         {% endif %}
-                        <br>
+
                         {% for c in circles %}
-                        <h2>{{ c }}º círculo: </h2>
+                        <br>
+                        <h2 style="font-size:270%">{{ c }}º círculo: </h2>
                         {% for spell in spells %}
                         {% if spell.circle == c %}
 

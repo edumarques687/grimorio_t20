@@ -1,33 +1,164 @@
 {% extends 'spell/spell_base.html' %}
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row text-center">
-        <h1>{{ grimoire.name }}: {{ count }} magia{{ count|pluralize }}</h1>
-    </div>
+<style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBoldItalic';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align: center;
+                font-size: 300%
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235
+            }
+
+            h3 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #f0dc82;
+                font-variant: small-caps;
+            }
+
+            h4 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #black;
+                font-variant: small-caps;
+            }
+
+            body {
+                background-image: url("/static/img/bg_2.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bld{
+                font-family: 'iowanOldStyleBold';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 110%;
+                font-variant: small-caps;
+            }
+
+            label{
+                font-family: 'iowanOldStyleRegular';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+        </style>
+
+<div class="container-fluid" >
     <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6 rounded" style="background-color:#F5F5F5">
-            {% for c in circles %}
-            <h2>{{ c }}º círculo: </h2>
-            {% for spell in spell_list %}
-            {% if spell.circle == c %}
-            <form action="{% url 'grimoire:remove_spell' %}" method="POST">
-                <input type="hidden" name="grimoire_id" value='{{ grimoire.id }}'>
-                <input type="hidden" name="spell" value='{{ spell.id }}'>
-                {% csrf_token %}
-                <a href="{% url 'spell:spell_details' spell.id %}">
-                    <h4><input type="submit" value="Remover" class="btn btn-danger" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>
-                </a>
-                <p>{{ spell.short_description }}</p>
-            </form>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-12">
+            <div class="row" style="padding-top:15px"></div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 bg_image" style="padding-top: 13px"></div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 bg_image" style="padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                        <h1>{{ grimoire.name }}: {{ count }} magia{{ count|pluralize }}</h1>
+
+                            {% for c in circles %}
+                            <h2>{{ c }}º círculo: </h2>
+                            {% for spell in spell_list %}
+                            {% if spell.circle == c %}
+                            <form action="{% url 'grimoire:remove_spell' %}" method="POST">
+                                <input type="hidden" name="grimoire_id" value='{{ grimoire.id }}'>
+                                <input type="hidden" name="spell" value='{{ spell.id }}'>
+                                {% csrf_token %}
+                                <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration:none; color:inherit">
+                                    <h4><input type="submit" value="Remov." class="btn btn-primary" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>
+                                </a>
+                                <p>{{ spell.short_description }}</p>
+                            </form>
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                </div>
+                <div class="col-md-3"></div>
+            </div>
         </div>
     </div>
 </div>
+
+<!--<div class="container-fluid">-->
+<!--    <div class="row text-center">-->
+<!--        <h1>{{ grimoire.name }}: {{ count }} magia{{ count|pluralize }}</h1>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-3"></div>-->
+<!--        <div class="col-md-6 rounded" style="background-color:#F5F5F5">-->
+<!--            {% for c in circles %}-->
+<!--            <h2>{{ c }}º círculo: </h2>-->
+<!--            {% for spell in spell_list %}-->
+<!--            {% if spell.circle == c %}-->
+<!--            <form action="{% url 'grimoire:remove_spell' %}" method="POST">-->
+<!--                <input type="hidden" name="grimoire_id" value='{{ grimoire.id }}'>-->
+<!--                <input type="hidden" name="spell" value='{{ spell.id }}'>-->
+<!--                {% csrf_token %}-->
+<!--                <a href="{% url 'spell:spell_details' spell.id %}">-->
+<!--                    <h4><input type="submit" value="Remover" class="btn btn-danger" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>-->
+<!--                </a>-->
+<!--                <p>{{ spell.short_description }}</p>-->
+<!--            </form>-->
+<!--            {% endif %}-->
+<!--            {% endfor %}-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 {% endblock %}

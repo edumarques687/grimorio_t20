@@ -1,9 +1,94 @@
 {% extends 'homepage/base.html' %}
 {% block content %}
 
+<style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 400%
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 200%
+            }
+
+            h5 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+            }
+
+            body {
+                background-image: url("/static/img/bg_1.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+
+            label{
+                font-family: 'iowanOldStyleBold';
+                color: black;
+                font-weight: normal;
+                font-style: normal;
+                text-align: center;
+                font-variant: small-caps;
+                font-size: 130%
+            }
+
+            form {
+                text-align: center;
+            }
+        </style>
+
 <div class="container-fluid">
+    <div class="row" style="padding-top:30px"></div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6 bg_image">
             <h1>Bem vindo, invocador!</h1>
             <br>
             {% if message != ''%}
@@ -23,7 +108,7 @@
                 <input type="submit" name='action' value="Ir!" class="btn btn-primary">
                 <input type="submit" name='action' value="Excluir" class="btn btn-danger">
             </form>
-            <br><h4>Ou</h4><br>
+            <br><h5>Ou</h5><br>
             {% endif %}
 
             <h2>Crie um novo grimório: </h2><br>
@@ -33,7 +118,9 @@
                 <input type="text" id="name" name="name"><br><br>
                 <input type="submit" value="Criar Grimório!" class="btn btn-primary">
             </form>
+            <div class="row" style="padding-top:30px"></div>
         </div>
+        <div class="col-md-3"> </div>
     </div>
 </div>
 {% endblock %}

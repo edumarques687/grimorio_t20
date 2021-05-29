@@ -1,76 +1,178 @@
 {% extends './spell_base.html' %}
 {% block content %}
 
-<div class="container-fluid">
+        <style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBoldItalic';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            body {
+                background-image: url("/static/img/bg_2.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            dd{
+                font-family: 'iowanOldStyleRegular';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            dt{
+                font-family: 'iowanOldStyleBold';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 110%;
+                font-variant: small-caps;
+            }
+
+            h2 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #f0dc82;
+                font-variant: small-caps;
+            }
+
+            h5 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #f0dc82;
+                font-variant: small-caps;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235
+            }
+
+            .enhc {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #d13235;
+                font-variant: small-caps;
+            }
+
+            p{
+                font-family: 'iowanOldStyleRegular';
+                color: black;
+                font-weight: normal;
+                font-style: normal;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+</style>
+
+<div class="container-fluid" >
     <div class="row">
         <div class="col-md-12">
+            <div class="row" style="padding-top:15px"></div>
             <div class="row">
-                <h1 style="text-align:center">
-                    {{spell.name}}
-                </h1>
-                <h3 style="text-align:center">
-                    ({{ spell.get_spell_type_display }} {{ spell.circle }})
-                </h3>
-
-                <h5 style="text-align:center">
-                    {{ spell.get_school_display }}
-                </h5>
+                <div class="col-md-3"></div>
+                <div class="col-md-6 bg_image" style="padding-top: 13px"></div>
+                <div class="col-md-3"></div>
             </div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-2">
-                    <dl>
-                        <dt>
-                            Execução:
 
-                        </dt>
-                        <dd>
-                            {{ spell.execution }}
+                <div class="col-md-3 bg_image" style="padding-bottom:13px">
+                    <div class="col-md-12" style="display: table; background-color:#B62E34;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                        <h2 style="text-align:center">
+                            {{ spell.get_school_display }}
+                        </h2>
+                        <h5 style="text-align:center">
+                            {{ spell.get_spell_type_display }} - {{ spell.circle }}º círculo
+                        </h5>
+                        <dl>
+                            <dt>
+                                Execução:
+                            </dt>
+                            <dd>
+                                {{ spell.execution }}
 
-                        </dd>
-                        <dt>
-                            Duração:
-                        </dt>
-                        <dd>
-                            {{ spell.duration }}
-                        </dd>
-                        <dt>
-                            Alcance:
-                        </dt>
-                        <dd>
-                            {{ spell.range }}
-                        </dd>
-                        <dt>
-                            Alvo/Área/Efeito:
-                        </dt>
-                        <dd>
-                            {{ spell.target_area_effect }}
-                        </dd>
-                        <dt>
-                            Resistência:
-                        </dt>
-                        <dd>
-                            {% if spell.resistance != '' %}
+                            </dd>
+                            <dt>
+                                Duração:
+                            </dt>
+                            <dd>
+                                {{ spell.duration }}
+                            </dd>
+                            <dt>
+                                Alcance:
+                            </dt>
+                            <dd>
+                                {{ spell.range }}
+                            </dd>
+                            <dt>
+                                Alvo/Área/Efeito:
+                            </dt>
+                            <dd>
+                                {{ spell.target_area_effect }}
+                            </dd>
+                            <dt>
+                                Resistência:
+                            </dt>
+                            <dd>
+                                {% if spell.resistance != '' %}
                                 {{ spell.resistance }}
-                            {% else %}
+                                {% else %}
                                 nenhuma
-                            {% endif %}
-                        </dd>
-                        <dt>
-                            Publicação:
-                        </dt>
-                        <dd>
-                            {{spell.book_magazine}}
-                        </dd>
-                    </dl>
+                                {% endif %}
+                            </dd>
+                            <dt>
+                                Publicação:
+                            </dt>
+                            <dd>
+                                {{spell.book_magazine}}
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 bg_image" style="padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                    <h1 style="text-align:center">
+                        {{spell.name}}
+                    </h1>
                     <p>
                         {{ spell.description }}
                     </p>
                     {% for enhancement in enhancements %}
                     <p>
-                        <b style="color:red">{{ enhancement.cost }}:</b>
+                        <b class="enhc">{{ enhancement.cost }}:</b>
                         {{enhancement.effect}}
                     </p>
                     {% endfor %}
@@ -80,5 +182,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
