@@ -24,14 +24,21 @@ def spell_page(request):
 
         for key, value in request.GET.items():
             if value != '':
-                if 'school' in key and value != '':
-                    if any(value in s for s in school_filters):
-                        query |= Q(school__icontains=value)
                 if key == 'keyword' and value != '':
                     kw_list = value.split(';')
                     for kw in kw_list:
+                        query |= Q(name__icontains=kw)
+                        query |= Q(enhancement__cost__icontains=kw)
                         query |= Q(description__icontains=kw)
                         query |= Q(enhancement__effect__icontains=kw)
+                    spells = spells.filter(query).distinct()
+                    query = Q()
+
+        for key, value in request.GET.items():
+            if value != '':
+                if 'school' in key and value != '':
+                    if any(value in s for s in school_filters):
+                        query |= Q(school__icontains=value)
                 if key == 'execution' and value != '':
                     query &= Q(execution__icontains=value)
                 if key == 'duration' and value != '':

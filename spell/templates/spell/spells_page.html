@@ -31,7 +31,8 @@
             h2 {
                 font-family: 'tormenta20';
                 font-weight: normal;
-                color: #d13235
+                color: #d13235;
+                display: inline;
             }
 
             h3 {
@@ -86,6 +87,66 @@
                 border-color:#3f0f12;
                 color:#f0dc82;
             }
+
+            .dropdown-btn{
+                background-color:Transparent;
+                background-repeat:no-repeat;
+                border: none;
+                cursor:pointer;
+                overflow: hidden;
+                outline:none;
+            }
+            .dropdown-container {
+                display: block;
+            }
+
+            .arrow {
+                border: solid;
+                border-width: 0 3px 3px 0;
+                padding: 6px;
+                display: inline-block;
+                align: center;
+                color: #d13235;
+            }
+            .down {
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+
+            .hide{
+                transform: rotate(90deg);
+                -webkit-transform: rotate(90deg);
+            }
+
+            .select{
+                border: 1px solid transparent;
+                padding: .5rem .75rem;
+                font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+                font-weight: 400;
+                line-height: 1.5;
+                vertical-align: middle;
+                font-size: 1rem;
+                border-radius: .25rem;
+                text-align: center;
+                text-decoration: none;
+                min-width: 8rem;
+            }
+
+            .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+                color: #f0dc82;
+                background-color: #3f0f12;
+                border-color: #f0dc82;
+            }
+
+            .select:hover, .select:focus, .select:active, .select.active, .open>.dropdown-toggle.select {
+                color: #f0dc82;
+                background-color: #3f0f12;
+                border-color: #f0dc82;
+            }
+
         </style>
 
 <div class="container-fluid" >
@@ -163,12 +224,12 @@
                         {% if user.is_authenticated %}
                         {% if user_grimoires %}
                         <h2>Selecione seu grimório: </h2>
-                        <select name="grimoire_id">
+                        <br>
+                        <select name="grimoire_id" class="select">
                             {% for grimoire in user_grimoires%}
                             <option value="{{grimoire.id}}">{{grimoire.name}}</option>
                             {% endfor %}
                         </select>
-
 
                         <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
                         {% endif %}
@@ -177,21 +238,24 @@
                         {% for c in circles %}
                         <br>
                         <h2 style="font-size:270%">{{ c }}º círculo: </h2>
-                        {% for spell in spells %}
-                        {% if spell.circle == c %}
+                        <button type="button" class="dropdown-btn"><i class="arrow down"></i></button>
+                        <div class="dropdown-container">
+                            {% for spell in spells %}
+                            {% if spell.circle == c %}
 
-                        <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
-                            <h5>
-                                {% if user.is_authenticated %}
-                                {% if user_grimoires %}
-                                <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
-                                {% endif %}
-                                {% endif %}
-                                {{ spell.name }}
-                            </h5>
-                        </a>
-                        {% endif %}
-                        {% endfor %}
+                            <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
+                                <h5>
+                                    {% if user.is_authenticated %}
+                                    {% if user_grimoires %}
+                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
+                                    {% endif %}
+                                    {% endif %}
+                                    {{ spell.name }}
+                                </h5>
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                         {% endfor %}
 
                     </form>
@@ -201,5 +265,23 @@
         </div>
     </div>
 </div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("hide");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "none") {
+      dropdownContent.style.display = "block";
+    } else {
+      dropdownContent.style.display = "none";
+    }
+  });
+}
+</script>
+
 
 {% endblock %}
