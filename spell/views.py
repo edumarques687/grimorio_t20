@@ -6,8 +6,14 @@ from grimoire.models import Grimoire
 
 def spell_page(request):
     user_grimoires = False
+    rip = False
     if request.user.is_authenticated:
         user_grimoires = Grimoire.objects.filter(user=request.user).all().order_by('name')
+
+        Lagrimas = ['Kasu','eduardo_marques1','EichelbaumElvis','silquelado', 'gionin@terra.com.br']
+        if request.user.get_username() in Lagrimas:
+            rip = True
+
     spells = Spell.objects.order_by('name').all()
     if request.method == 'GET':
         query = Q()
@@ -19,7 +25,7 @@ def spell_page(request):
                 if 'type' in key and value != '':
                     if any(value in s for s in type_filters):
                         query |= Q(spell_type__icontains=value)
-        spells = Spell.objects.filter(query).all()
+        spells = Spell.objects.filter(query).all().order_by('name')
         query = Q()
 
         for key, value in request.GET.items():
@@ -60,7 +66,9 @@ def spell_page(request):
         return render(request, 'spell/spells_page.html', {'spells': spells,
                                                       'circles': ['1', '2', '3', '4', '5'],
                                                       'user_grimoires': user_grimoires,
-                                                      'origins': origins})
+                                                      'origins': origins,
+                                                      'rip': rip,
+                                                      })
 
 
 def spell_details(request, spell_id):

@@ -8,7 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 
 
 def home(request):
-    spells = Spell.objects.all()
+    spells = Spell.objects.all().order_by('name')
     return render(request, 'homepage/home.html', {'spells':spells})
 
 @csrf_protect

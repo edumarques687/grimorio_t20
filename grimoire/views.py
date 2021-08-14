@@ -47,7 +47,7 @@ def grimoire_page(request):
             return delete_grimoire(request)
 
         grimoire = get_object_or_404(Grimoire, pk=request.POST['grimoire_id'])
-        spell_list = [val for val in Spell.objects.all() if val in grimoire.spells.all()]
+        spell_list = [val for val in Spell.objects.all().order_by('name') if val in grimoire.spells.all()]
         return render(request, 'grimoire/grimoire_page.html', {
             'grimoire': grimoire, 'spell_list': spell_list,
             'circles': ['1', '2', '3', '4', '5'],
@@ -64,7 +64,7 @@ def add_spells(request):
                 sp = Spell.objects.get(id=spell_id)
                 grimoire.spells.add(sp.id)
 
-        spell_list = [val for val in Spell.objects.all() if val in grimoire.spells.all()]
+        spell_list = [val for val in Spell.objects.all().order_by('name') if val in grimoire.spells.all()]
         return render(request, 'grimoire/grimoire_page.html', {
             'grimoire': grimoire, 'spell_list': spell_list, 'circles': ['1', '2', '3', '4', '5'],
             'count': len(spell_list)})
@@ -78,7 +78,7 @@ def remove_spell(request):
         sp = Spell.objects.get(id=spell_id)
         grimoire.spells.remove(sp.id)
 
-        spell_list = [val for val in Spell.objects.all() if val in grimoire.spells.all()]
+        spell_list = [val for val in Spell.objects.all().order_by('name') if val in grimoire.spells.all()]
         print("Removing spell {} in grimoire {}".format(spell_id, grimoire.id))
         return render(request, 'grimoire/grimoire_page.html', {
             'grimoire': grimoire, 'spell_list': spell_list, 'circles': ['1', '2', '3', '4', '5']})
