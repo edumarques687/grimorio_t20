@@ -147,6 +147,10 @@
                 border-color: #f0dc82;
             }
 
+            img {
+                display: inline-block;
+            }
+
         </style>
 
 <div class="container-fluid" >
@@ -223,6 +227,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 bg_image" style="padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                    {% load static %}
                     <form action="{% url 'grimoire:add_spells' %}" method="POST">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
@@ -254,6 +259,7 @@
                                     <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
                                     {% endif %}
                                     {% endif %}
+                                    <img src="{% static 'img/{{spell.school}}.png' %}" alt="{{spell.school}}">
                                     {{ spell.name }}
                                 </h5>
                             </a>
