@@ -176,43 +176,43 @@
                                 Magias encontradas: {{ spells.count }}
                             </h3>
                             <label class="bld"><b>Tipo: </b></label><br>
-                            <input type="checkbox" id="Arcana" name="type1" value="AR" style="height:15px;width:15px;">
+                            <input type="checkbox" id="Arcana" name="type1" value="AR" style="height:15px;width:15px;" {% if request.GET.type1 %} checked {% endif %}>
                             <label for="Arcana">Arcana</label><br>
-                            <input type="checkbox" id="Divina" name="type2" value="DI" style="height:15px;width:15px;">
+                            <input type="checkbox" id="Divina" name="type2" value="DI" style="height:15px;width:15px;" {% if request.GET.type2 %} checked {% endif %}>
                             <label for="Divina">Divina</label><br>
-                            <input type="checkbox" id="Universal" name="type3" value="UN" style="height:15px;width:15px;">
+                            <input type="checkbox" id="Universal" name="type3" value="UN" style="height:15px;width:15px;" {% if request.GET.type3 %} checked {% endif %}>
                             <label for="Universal">Universal</label><br>
                             <br>
 
                             <label class="bld"><b>Escola: </b></label><br>
-                            <input type="checkbox" id="AB" name="school1" value="AB" style="height:15px;width:15px;">
+                            <input type="checkbox" id="AB" name="school1" value="AB" style="height:15px;width:15px;" {% if request.GET.school1 %} checked {% endif %}>
                             <label for="AB">Abjuração</label><br>
-                            <input type="checkbox" id="AD" name="school2" value="AD" style="height:15px;width:15px;">
+                            <input type="checkbox" id="AD" name="school2" value="AD" style="height:15px;width:15px;" {% if request.GET.school2 %} checked {% endif %}>
                             <label for="AD">Advinhação</label><br>
-                            <input type="checkbox" id="CO" name="school3" value="CO" style="height:15px;width:15px;">
+                            <input type="checkbox" id="CO" name="school3" value="CO" style="height:15px;width:15px;" {% if request.GET.school3 %} checked {% endif %}>
                             <label for="CO">Convocação</label><br>
-                            <input type="checkbox" id="EN" name="school4" value="EN" style="height:15px;width:15px;">
+                            <input type="checkbox" id="EN" name="school4" value="EN" style="height:15px;width:15px;" {% if request.GET.school4 %} checked {% endif %}>
                             <label for="EN">Encantamento</label><br>
-                            <input type="checkbox" id="EV" name="school5" value="EV" style="height:15px;width:15px;">
+                            <input type="checkbox" id="EV" name="school5" value="EV" style="height:15px;width:15px;" {% if request.GET.school5 %} checked {% endif %}>
                             <label for="EV">Evocação</label><br>
-                            <input type="checkbox" id="IL" name="school6" value="IL" style="height:15px;width:15px;">
+                            <input type="checkbox" id="IL" name="school6" value="IL" style="height:15px;width:15px;" {% if request.GET.school6 %} checked {% endif %}>
                             <label for="IL">Ilusão</label><br>
-                            <input type="checkbox" id="NE" name="school7" value="NE" style="height:15px;width:15px;">
+                            <input type="checkbox" id="NE" name="school7" value="NE" style="height:15px;width:15px;" {% if request.GET.school7 %} checked {% endif %}>
                             <label for="NE">Necromancia</label><br>
-                            <input type="checkbox" id="TR" name="school8" value="TR" style="height:15px;width:15px;">
+                            <input type="checkbox" id="TR" name="school8" value="TR" style="height:15px;width:15px;" {% if request.GET.school8 %} checked {% endif %}>
                             <label for="AB">Transmutação</label><br>
                             <br>
 
                             <label class="bld" for="keyword">Palavras-chave: (separe com ';')</label>
-                            <input type="text" id="keyword" name="keyword" style="display:table-cell; width:100%"><br>
+                            <input type="text" id="keyword" name="keyword" style="display:table-cell; width:100%" {% if request.GET.keyword %} value="{{request.GET.keyword}}" {% endif %}><br>
                             <label class="bld" for="execution">Execução: </label>
-                            <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
+                            <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"{% if request.GET.execution %} value="{{request.GET.execution}}" {% endif %}><br>
                             <label class="bld" for="duration">Duração: </label>
-                            <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
+                            <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"{% if request.GET.duration %} value="{{request.GET.duration}}" {% endif %}><br>
                             <label class="bld" for="target_area_effect">Alvo, Área ou Efeito: </label>
-                            <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"><br>
+                            <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"{% if request.GET.target_area_effect %} value="{{request.GET.target_area_effect}}" {% endif %}><br>
                             <label class="bld" for="resistance">Resistência: </label>
-                            <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
+                            <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"{% if request.GET.resistance %} value="{{request.GET.resistance}}" {% endif %}><br>
 
                             <label class="bld" >Publicação: </label>
                             <select name="book_magazine" style="display:table-cell; width:100%">
@@ -259,7 +259,6 @@
                                     <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
                                     {% endif %}
                                     {% endif %}
-                                    <img src="{% static 'img/{{spell.school}}.png' %}" alt="{{spell.school}}">
                                     {{ spell.name }}
                                 </h5>
                             </a>
