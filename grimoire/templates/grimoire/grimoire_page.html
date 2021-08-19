@@ -1,5 +1,6 @@
 {% extends 'spell/spell_base.html' %}
 {% block content %}
+{% load static %}
 
 <style>
             @font-face {
@@ -119,9 +120,20 @@
                                 <input type="hidden" name="spell" value='{{ spell.id }}'>
                                 {% csrf_token %}
                                 <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration:none; color:inherit">
-                                    <h4><input type="submit" value="Remov." class="btn btn-primary" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>
+                                    <h4>
+                                        <input type="submit" value="Remov." class="btn btn-primary" style="padding:0;height:25px;width:auto">
+                                        {% if spell.school == 'AD'%}
+                                        {% with 'img/black_'|add:'divination.png' as path %}
+                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% endwith %}
+                                        {% else %}
+                                        {% with 'img/black_'|add:spell.school|add:'.png' as path %}
+                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% endwith %}
+                                        {% endif %}
+                                        {{ spell.name }}
+                                    </h4>
                                 </a>
-                                <p>{{ spell.short_description }}</p>
                             </form>
                             {% endif %}
                             {% endfor %}
