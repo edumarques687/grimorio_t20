@@ -47,6 +47,7 @@
                 font-weight: normal;
                 color: #d13235;
                 font-variant: small-caps;
+                vertical-align:text-bottom;
             }
 
             body {
@@ -256,9 +257,12 @@
                                 <h5>
                                     {% if user.is_authenticated %}
                                     {% if user_grimoires %}
-                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;">
+                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:text-bottom">
                                     {% endif %}
                                     {% endif %}
+                                    {% with 'img/'|add:spell.school|add:'.png' as path %}
+                                    <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                    {% endwith %}
                                     {{ spell.name }}
                                 </h5>
                             </a>
