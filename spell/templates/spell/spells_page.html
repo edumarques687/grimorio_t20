@@ -260,9 +260,15 @@
                                     <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:text-bottom">
                                     {% endif %}
                                     {% endif %}
+                                    {% if spell.school == 'AD'%}
+                                    {% with 'img/'|add:'divination.png' as path %}
+                                    <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                    {% endwith %}
+                                    {% else %}
                                     {% with 'img/'|add:spell.school|add:'.png' as path %}
                                     <img src="{% static path %}" style="height:1em;vertical-align:sub">
                                     {% endwith %}
+                                    {% endif %}
                                     {{ spell.name }}
                                 </h5>
                             </a>
