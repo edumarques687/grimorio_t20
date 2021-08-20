@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from spell.models import Spell, Enhancement
 from django.db.models import Q
 from grimoire.models import Grimoire
-import unidecode
+# import unidecode
 
 
 def spell_page(request):
@@ -77,9 +77,10 @@ def spell_details(request, spell_id):
     return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements})
 
 
-def copy_sorting_name(request):
-    spells = Spell.objects.order_by('name').all()
-    for spell in spells:
-        spell.sorting_name = unidecode.unidecode(spell.name)
-        spell.save()
-    return render(request, 'homepage/home.html', {'response': 'sorting names copied'})
+# Problems to run with pythonanywhere
+# def copy_sorting_name(request):
+#     spells = Spell.objects.order_by('name').all()
+#     for spell in spells:
+#         spell.sorting_name = unidecode.unidecode(spell.name)
+#         spell.save()
+#     return render(request, 'homepage/home.html', {'response': 'sorting names copied'})

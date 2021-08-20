@@ -21,6 +21,6 @@ app_name = 'spell'
 
 urlpatterns = [
     path('', views.spell_page, name='spells_page'),
-    path('copysortingname/', views.copy_sorting_name, name='copy_sorting_name'),
+    # path('copysortingname/', views.copy_sorting_name, name='copy_sorting_name'),
     path('<int:spell_id>/', views.spell_details, name='spell_details'),
 ]
