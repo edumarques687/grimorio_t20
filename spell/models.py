@@ -14,6 +14,7 @@ class Enhancement(models.Model):
 class Spell(models.Model):
 
     name = models.TextField()
+    sorting_name = models.TextField(blank=True)
     image = models.ImageField(upload_to='spell/images', blank=True)
 
     SPELL_TYPE_CHOICES = [

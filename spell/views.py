@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from spell.models import Spell, Enhancement
 from django.db.models import Q
 from grimoire.models import Grimoire
+import unidecode
 
 
 def spell_page(request):
@@ -14,7 +15,6 @@ def spell_page(request):
         if request.user.get_username() in Lagrimas:
             rip = True
 
-    spells = Spell.objects.order_by('name').all()
     if request.method == 'GET':
         query = Q()
         query &= Q()
@@ -25,7 +25,7 @@ def spell_page(request):
                 if 'type' in key and value != '':
                     if any(value in s for s in type_filters):
                         query |= Q(spell_type__icontains=value)
-        spells = Spell.objects.filter(query).all().order_by('name')
+        spells = Spell.objects.filter(query).order_by('sorting_name')
         query = Q()
 
         for key, value in request.GET.items():
@@ -57,21 +57,29 @@ def spell_page(request):
                     query &= Q(book_magazine__icontains=value)
                 print(query)
 
-        spells = spells.filter(query).distinct()
+        spells = spells.filter(query).order_by('sorting_name').distinct()
         origins = []
         for spell in spells:
             spell_origin = spell.book_magazine
             if spell_origin not in origins:
                 origins.append(spell_origin)
         return render(request, 'spell/spells_page.html', {'spells': spells,
-                                                      'circles': ['1', '2', '3', '4', '5'],
-                                                      'user_grimoires': user_grimoires,
-                                                      'origins': origins,
-                                                      'rip': rip,
-                                                      })
+                                                          'circles': ['1', '2', '3', '4', '5'],
+                                                          'user_grimoires': user_grimoires,
+                                                          'origins': origins,
+                                                          'rip': rip,
+                                                          })
 
 
 def spell_details(request, spell_id):
     spell = get_object_or_404(Spell, pk=spell_id)
     enhancements = Enhancement.objects.filter(related_spell=spell_id)
     return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements})
+
+
+def copy_sorting_name(request):
+    spells = Spell.objects.order_by('name').all()
+    for spell in spells:
+        spell.sorting_name = unidecode.unidecode(spell.name)
+        spell.save()
+    return render(request, 'homepage/home.html', {'response': 'sorting names copied'})
