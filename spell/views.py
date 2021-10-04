@@ -55,7 +55,6 @@ def spell_page(request):
                     query &= Q(resistance__icontains=value)
                 if key == 'book_magazine' and value != '':
                     query &= Q(book_magazine__icontains=value)
-                print(query)
 
         spells = spells.filter(query).order_by('sorting_name').distinct()
         origins = []
@@ -77,7 +76,6 @@ def spell_details(request, spell_id):
     return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements})
 
 
-# Problems to run with pythonanywhere
 # def copy_sorting_name(request):
 #     spells = Spell.objects.order_by('name').all()
 #     for spell in spells:
