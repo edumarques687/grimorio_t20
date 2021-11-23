@@ -19,21 +19,21 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Grimório T20</a>
+                <a class="navbar-brand" href="{% url 'about' %}">Grimório T20</a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="nav navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'spell:spells_page'%}" style="margin-right:8px">Todas as Magias</a>
+                            <a class="nav-link" href="{% url 'spell:spells_page'%}" style="margin-right:8px">Lista de Magias</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item active">
                             <a class="nav-link" href="{% url 'grimoire:grimoire_list' %}" style="color:white">Seus Grimórios</a>
                         </li>
                         <li class="nav-item">
-                            <span class="navbar-text" style="color:white; margin-right:3px">
+                            <span class="navbar-text" style="color:white; margin-right:6px">
                                 {{ user.username }}
                             </span>
 <!--                            <a class="nav-item nav-link deactive" href="" style="color:white"></a>-->
