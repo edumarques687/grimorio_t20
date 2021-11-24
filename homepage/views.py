@@ -7,9 +7,9 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 
 
-def home(request):
+def about(request):
     spells = Spell.objects.all().order_by('name')
-    return render(request, 'homepage/home.html', {'spells':spells})
+    return render(request, 'homepage/home.html', {'spells': spells})
 
 @csrf_protect
 def signupuser(request):
@@ -21,7 +21,7 @@ def signupuser(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('home')
+                return redirect('/grimoire/g/')
             except IntegrityError:
                 return render(request, 'homepage/signupuser.html', {'form': UserCreationForm(), 'error':'Este usuário não está disponível'})
         else:
@@ -37,9 +37,12 @@ def loginuser(request):
             return render(request, 'homepage/loginuser.html', {'form': AuthenticationForm(), 'error': 'Usuário e/ou senha incorreta!'})
         else:
             login(request, user)
-            return redirect('home')
+            return redirect('/grimoire/g/')
 
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return render(request, 'homepage/home.html')
+
+def help(request):
+    return render(request, 'homepage/help.html')

@@ -9,6 +9,8 @@ import time
 
 @csrf_protect
 def grimoire_list(request):
+    if not request.user.is_authenticated:
+        return redirect('loginuser')
     message = ''
     if request.method == "POST":
         if request.POST['name'] == '':
@@ -26,7 +28,7 @@ def grimoire_list(request):
         if user_grimoires is not None:
             return render(request, 'grimoire/grimoire_list.html', {
                 'user_grimoires': user_grimoires, 'message': message})
-    return render(request, 'homepage/login.html')
+    return render(request, 'homepage/loginuser.html')
 
 
 @csrf_protect
@@ -38,10 +40,12 @@ def delete_grimoire(request):
             user_grimoires = Grimoire.objects.filter(user=request.user).all().order_by('name')
             return render(request, 'grimoire/grimoire_list.html', {
                 'user_grimoires': user_grimoires, 'message': 'Grimório {} excluído com sucesso!'.format(grimoire.name)})
-        return render(request, 'homepage/login.html')
+        return render(request, 'homepage/loginuser.html')
 
 @csrf_protect
 def grimoire_page(request):
+    if not request.user.is_authenticated:
+        return redirect('loginuser')
     if request.method == 'POST':
         if request.POST['action'] == 'Excluir':
             return delete_grimoire(request)
