@@ -172,7 +172,7 @@
 
                 <div class="col-md-3 bg_image">
                     <div class="col-md-12" style="display: table; background-color:#B62E34;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
-                        <form action="{% url 'spell:spells_page' %}">
+                        <form id="filter" action="{% url 'spell:spells_page' %}">
                             <h3 style="text-align:left">
                                 Magias encontradas: {{ spells.count }}
                             </h3>
@@ -210,6 +210,8 @@
                             <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"{% if request.GET.execution %} value="{{request.GET.execution}}" {% endif %}><br>
                             <label class="bld" for="duration">Duração: </label>
                             <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"{% if request.GET.duration %} value="{{request.GET.duration}}" {% endif %}><br>
+                            <label class="bld" for="range">Alcance: </label>
+                            <input type="text" id="range" name="range" style="display:table-cell; width:100%"{% if request.GET.range %} value="{{request.GET.range}}" {% endif %}><br>
                             <label class="bld" for="target_area_effect">Alvo, Área ou Efeito: </label>
                             <input type="text" id="target_area_effect" name="target_area_effect" style="display:table-cell; width:100%"{% if request.GET.target_area_effect %} value="{{request.GET.target_area_effect}}" {% endif %}><br>
                             <label class="bld" for="resistance">Resistência: </label>
@@ -223,7 +225,35 @@
                                 {% endfor %}
                             </select><br><br>
 
-                            <input type="submit" value="Filtrar magias" class="btn btn-primary"><br>
+                            <input type="submit" value="Filtrar magias" class="btn btn-primary">
+                            <button class="btn btn-primary" style="margin-left:10px" onclick="
+                                document.getElementById('filter').reset();
+
+                                document.getElementById('Arcana').checked = false;
+                                document.getElementById('Divina').checked = false;
+                                document.getElementById('Universal').checked = false;
+
+                                document.getElementById('AB').checked = false;
+                                document.getElementById('AD').checked = false;
+                                document.getElementById('CO').checked = false;
+                                document.getElementById('EN').checked = false;
+                                document.getElementById('EV').checked = false;
+                                document.getElementById('IL').checked = false;
+                                document.getElementById('NE').checked = false;
+                                document.getElementById('TR').checked = false;
+
+                                document.getElementById('keyword').value = null;
+                                document.getElementById('execution').value = null;
+                                document.getElementById('duration').value = null;
+                                document.getElementById('range').value = null;
+                                document.getElementById('target_area_effect').value = null;
+                                document.getElementById('resistance').value = null;
+
+                                return false;
+                            ">
+                                Limpar filtros
+                            </button>
+                            <br>
                         </form>
                     </div>
                 </div>

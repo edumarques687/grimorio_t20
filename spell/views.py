@@ -49,6 +49,8 @@ def spell_page(request):
                     query &= Q(execution__icontains=value)
                 if key == 'duration' and value != '':
                     query &= Q(duration__icontains=value)
+                if key == 'range' and value != '':
+                    query &= Q(range__icontains=value)
                 if key == 'target_area_effect' and value != '':
                     query &= Q(target_area_effect__icontains=value)
                 if key == 'resistance' and value != '':
