@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 
 class Enhancement(models.Model):
@@ -68,6 +69,7 @@ class Spell(models.Model):
     short_description = models.CharField(max_length=100, blank=True)
     book_magazine = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    shared_users = models.TextField(blank=True)
 
     def id(self):
         return self.id
@@ -75,4 +77,9 @@ class Spell(models.Model):
     def __str__(self):
         return self.name
 
+
+class SpellForm(ModelForm):
+    class Meta:
+        model = Spell
+        fields = ['name', 'spell_type', 'school', 'circle', 'execution', 'range', 'target_area_effect', 'duration', 'resistance', 'description']
 

@@ -1,0 +1,135 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+
+<style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 400%
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 200%
+            }
+
+            body {
+                background-image: url("/static/img/bg_1.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+
+            label{
+                font-family: 'iowanOldStyleRegular';
+                color: black;
+                font-weight: normal;
+                font-style: normal;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            form {
+                text-align: center;
+            }
+        </style>
+
+<div class="container-fluid">
+    <div class="row" style="padding-top:30px"></div>
+    <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6 bg_image">
+            <h1>Criar Magia</h1>
+            <h2>{{error}}</h2>
+            <form id="spell" method="POST">
+                <label class="bld" for="name">Nome da magia: </label>
+                <input type="text" id="name" name="name" style="display:table-cell; width:100%"><br>
+
+                <label class="bld" >Tipo: </label>
+                <select name="spell_type:" style="display:table-cell; width:100%">
+                    <option value="AR" selected="selected">Arcana</option>
+                    <option value="DI">Divina</option>
+                    <option value="UN">Universal</option>
+                </select><br>
+
+                <label class="bld" >Círculo: </label>
+                <select name="circle:" style="display:table-cell; width:100%">
+                    <option value="1" selected="selected">1º</option>
+                    <option value="2">2º</option>
+                    <option value="3">3º</option>
+                    <option value="4">4º</option>
+                    <option value="5">5º</option>
+                </select><br>
+
+                <label class="bld" >Escola: </label>
+                <select name="school:" style="display:table-cell; width:100%">
+                    <option value="AB" selected="selected">Abjuração</option>
+                    <option value="AD">Adivinhação</option>
+                    <option value="CO">Convocação</option>
+                    <option value="EN">Encantamento</option>
+                    <option value="EV">Evocação</option>
+                    <option value="IL">Ilusão</option>
+                    <option value="NE">Necromancia</option>
+                    <option value="TR">Transmutação</option>
+                </select><br>
+
+                <label class="bld" for="execution">Execução: </label>
+                <input type="text" id="execution" name="execution" style="display:table-cell; width:100%"><br>
+
+                <label class="bld" for="range">Alcance: </label>
+                <input type="text" id="range" name="range" style="display:table-cell; width:100%"><br>
+
+                <label class="bld" for="duration">Duração: </label>
+                <input type="text" id="duration" name="duration" style="display:table-cell; width:100%"><br>
+
+                <label class="bld" for="resistance">Resistência: </label>
+                <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"><br>
+
+                <label class="bld" for="description">Descrição: </label>
+                <input type="text" id="description" name="description" style="display:table-cell; width:100%"><br>
+
+                <br>
+                <button type="submit" class="btn btn-primary" style="">Enviar</button>
+            </form>
+            <div class="row" style="padding-top:30px"></div>
+        </div>
+        <div class="col-md-3"> </div>
+    </div>
+</div>
+
+{% endblock %}

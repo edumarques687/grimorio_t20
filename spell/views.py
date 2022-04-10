@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from spell.models import Spell, Enhancement
+from django.shortcuts import render, get_object_or_404, redirect
+from spell.models import Spell, Enhancement, SpellForm
 from django.db.models import Q
 from grimoire.models import Grimoire
 # import unidecode
@@ -16,6 +16,13 @@ def spell_page(request):
             rip = True
 
     if request.method == 'GET':
+
+        query = Q(user='1')
+        if request.user.is_authenticated:
+            query |= Q(user=request.user)
+            query |= Q(shared_users__icontains=';' + request.user.get_username() + ';')
+        spells = Spell.objects.filter(query).order_by('sorting_name')
+
         query = Q()
         query &= Q()
         type_filters = ['AR', 'DI', 'UN']
@@ -25,7 +32,7 @@ def spell_page(request):
                 if 'type' in key and value != '':
                     if any(value in s for s in type_filters):
                         query |= Q(spell_type__icontains=value)
-        spells = Spell.objects.filter(query).order_by('sorting_name')
+        spells = spells.filter(query).order_by('sorting_name')
         query = Q()
 
         for key, value in request.GET.items():
@@ -76,6 +83,47 @@ def spell_details(request, spell_id):
     spell = get_object_or_404(Spell, pk=spell_id)
     enhancements = Enhancement.objects.filter(related_spell=spell_id)
     return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements})
+
+
+def create_spell(request):
+    if not request.user.is_authenticated:
+        return redirect('loginuser')
+#    if request.method == 'GET':
+    return render(request, 'spell/create_spell.html', {'form': SpellForm()})
+
+
+def add_shared_spell(request, spell_id):
+    if not request.user.is_authenticated:
+        return redirect('loginuser')
+    spell = get_object_or_404(Spell, pk=spell_id)
+    user = (';' + request.user.get_username() + ';')
+    message = ''
+    if spell.book_magazine == 'Homebrew':
+        if spell.user != request.user:
+            if user not in spell.shared_users:
+                spell.shared_users += user
+                spell.save()
+                message = "Magia '" + spell.name + "' adicionada."
+            else:
+                message = 'Você já adicionou está magia.'
+        else:
+            message = 'Para adicionar uma magia, você não pode ser o criador dela.'
+    else:
+        message = 'Para adicionar uma magia, ela deve ser Homebrew.'
+    return render(request, 'spell/add_shared_spell.html', {'spell': spell, 'creator': spell.user.username, 'message': message})
+
+def remove_shared_spell(request, spell_id):
+    if not request.user.is_authenticated:
+        return redirect('loginuser')
+    spell = get_object_or_404(Spell, pk=spell_id)
+    user = (';' + request.user.get_username() + ';')
+    if spell.book_magazine == 'Homebrew':
+        if spell.user != request.user:
+            if user in spell.shared_users:
+                spell.shared_users = spell.shared_users.replace(user, '')
+                spell.save()
+    return redirect('/')
+
 
 
 # def copy_sorting_name(request):

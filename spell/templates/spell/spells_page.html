@@ -201,7 +201,7 @@
                             <input type="checkbox" id="NE" name="school7" value="NE" style="height:15px;width:15px;" {% if request.GET.school7 %} checked {% endif %}>
                             <label for="NE">Necromancia</label><br>
                             <input type="checkbox" id="TR" name="school8" value="TR" style="height:15px;width:15px;" {% if request.GET.school8 %} checked {% endif %}>
-                            <label for="AB">Transmutação</label><br>
+                            <label for="TR">Transmutação</label><br>
                             <br>
 
                             <label class="bld" for="keyword">Palavras-chave: (separe com ';')</label>
@@ -298,6 +298,9 @@
                                     {% with 'img/'|add:spell.school|add:'.png' as path %}
                                     <img src="{% static path %}" style="height:1em;vertical-align:sub">
                                     {% endwith %}
+                                    {% endif %}
+                                    {% if spell.book_magazine == 'Homebrew' %}
+                                    (HB)
                                     {% endif %}
                                     {{ spell.name }}
                                 </h5>

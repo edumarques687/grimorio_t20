@@ -44,6 +44,13 @@
                 bacground-position: center;
             }
 
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+
             dd{
                 font-family: 'iowanOldStyleRegular';
                 color: white;
@@ -118,6 +125,16 @@
                         <h5 style="text-align:center">
                             {{ spell.get_spell_type_display }} - {{ spell.circle }}º círculo
                         </h5>
+                        {% if spell.book_magazine == 'Homebrew' %}
+                            <button onclick="copyText()" class="btn btn-primary">Compartilhar magia</button>
+                            {% if user.is_authenticated %}
+                                {% with ";"|add:user.get_username|add:";" as username %}
+                                    {% if username in spell.shared_users %}
+                                        <button id="remove_spell" class="btn btn-primary">Remover magia</button>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endif %}
                         <dl>
                             <dt>
                                 Execução:
@@ -182,4 +199,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    function copyText() {
+        /* Copy text into clipboard */
+        navigator.clipboard.writeText(document.location.origin + "/add_spell/{{spell.id}}");
+    }
+</script>
+
+<script>
+    document.getElementById("remove_spell").onclick = function () {
+        location.href = document.location.origin + "/remove_spell/{{spell.id}}";
+    };
+</script>
 {% endblock %}
