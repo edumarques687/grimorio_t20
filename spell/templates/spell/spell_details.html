@@ -184,6 +184,9 @@
                     <h1 style="text-align:center">
                         {{spell.name}}
                     </h1>
+                    {% if spell.image %}
+                    <img src="{{spell.image.url}}" style="max-width:100%;border-radius:3%">
+                    {% endif %}
                     <p>
                         {{ spell.description }}
                     </p>
