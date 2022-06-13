@@ -44,6 +44,27 @@
                 bacground-position: center;
             }
 
+            .titulo {
+                background-image: url("/static/styles/Imagens/titulo.png");
+                background-repeat: no-repeat;
+
+                background-size: contain;
+                background-position: center;
+
+            }
+
+            .box {
+                display: table;
+                border: 20px solid black;
+                border-image: url("/static/img/box_2.png") 4% repeat;
+                background-color: #B6292E;
+                background-clip: padding-box, border-box;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left:10px;
+                padding-right:10px;
+            }
+
             .btn-primary{
             font-family: 'iowanOldStyleRegular';
                 background-color:#3f0f12;
@@ -111,30 +132,34 @@
             <div class="row" style="padding-top:15px"></div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-6 bg_image" style="padding-top: 13px"></div>
+                <div class="col-md-6 bg_image" style="padding-top: 13px">
+                    {% if is_homebrew %}
+                        <div class="titulo" style="margin: auto; width: 100%"><h1 style="text-align: center; color: #f0dc82;">Hombrew</h1></div>
+                    {% endif %}
+                </div>
                 <div class="col-md-3"></div>
             </div>
+
             <div class="row">
                 <div class="col-md-3"></div>
-
                 <div class="col-md-3 bg_image" style="padding-bottom:13px">
-                    <div class="col-md-12" style="display: table; background-color:#B62E34;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                    <div class="col-md-12 box">
                         <h2 style="text-align:center">
                             {{ spell.get_school_display }}
                         </h2>
                         <h5 style="text-align:center">
                             {{ spell.get_spell_type_display }} - {{ spell.circle }}º círculo
                         </h5>
-                        {% if spell.book_magazine == 'Homebrew' %}
-                            <button onclick="copyText()" class="btn btn-primary">Compartilhar magia</button>
-                            {% if user.is_authenticated %}
-                                {% with ";"|add:user.get_username|add:";" as username %}
-                                    {% if username in spell.shared_users %}
-                                        <button id="remove_spell" class="btn btn-primary">Remover magia</button>
-                                    {% endif %}
-                                {% endwith %}
-                            {% endif %}
-                        {% endif %}
+<!--                        {% if spell.user != 'admin' %}-->
+<!--                            <button onclick="copyText()" class="btn btn-primary">Compartilhar magia</button>-->
+<!--                            {% if user.is_authenticated %}-->
+<!--                                {% with ";"|add:user.get_username|add:";" as username %}-->
+<!--                                    {% if username in spell.shared_users %}-->
+<!--                                        <button id="remove_spell" class="btn btn-primary" style="float: right">Remover magia</button>-->
+<!--                                    {% endif %}-->
+<!--                                {% endwith %}-->
+<!--                            {% endif %}-->
+<!--                        {% endif %}-->
                         <dl>
                             <dt>
                                 Execução:
@@ -203,16 +228,16 @@
     </div>
 </div>
 
-<script>
-    function copyText() {
-        /* Copy text into clipboard */
-        navigator.clipboard.writeText(document.location.origin + "/add_spell/{{spell.id}}");
-    }
-</script>
+<!--<script>-->
+<!--    function copyText() {-->
+<!--        /* Copy text into clipboard */-->
+<!--        navigator.clipboard.writeText(document.location.origin + "/add_spell/{{spell.id}}");-->
+<!--    }-->
+<!--</script>-->
 
-<script>
-    document.getElementById("remove_spell").onclick = function () {
-        location.href = document.location.origin + "/remove_spell/{{spell.id}}";
-    };
-</script>
+<!--<script>-->
+<!--    document.getElementById("remove_spell").onclick = function () {-->
+<!--        location.href = document.location.origin + "/remove_spell/{{spell.id}}";-->
+<!--    };-->
+<!--</script>-->
 {% endblock %}

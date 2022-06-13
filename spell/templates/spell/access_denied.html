@@ -1,0 +1,136 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+
+        <style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBoldItalic';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 400%
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align:center;
+                font-size: 200%
+            }
+
+            .t20 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                font-size: 130%
+            }
+
+            h3 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #B6992A;
+                font-variant: small-caps;
+            }
+
+            h5 {
+                font-family: 'iowanOldStyleBold';
+                font-weight: normal;
+                color: #d13235;
+                font-variant: small-caps;
+            }
+
+            body {
+                background-image: url("/static/img/bg_1.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                bacground-position: center;
+            }
+
+            .bld{
+                font-family: 'iowanOldStyleBold';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 110%;
+                font-variant: small-caps;
+            }
+
+            label{
+                font-family: 'iowanOldStyleRegular';
+                color: white;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .btn-primary{
+            font-family: 'iowanOldStyleRegular';
+                background-color:#3f0f12;
+                border-color:#3f0f12;
+                color:#f0dc82;
+            }
+
+            p{
+                font-family: 'iowanOldStyleRegular';
+                color: black;
+                font-weight: normal;
+                font-style: normal;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        </style>
+
+<div class="container-fluid">
+    <div class="row" style="padding-top:30px"></div>
+    <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6 bg_image">
+<!--            <br><img width="100%" height="auto" style="max-width:1000px" alt="Tormenta 20" src="https://jamboeditora.com.br/app/uploads/2020/11/jamboeditora-artigo-t20.jpg" class="d-inline-block align-top" />-->
+            <h1>
+                Acesso negado
+            </h1>
+            <p style="text-align: center">
+                Esta é uma magia homebrew de uso pessoal, e não está disponível ao público.
+            </p>
+            <h3>
+                <a href="{% url 'spell:spells_page' %}" style="text-align:center; color:inherit;text-decoration:none"><h2>Lista de Magias</h2></a>
+            </h3>
+            <div class="row" style="padding-bottom:30px"></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

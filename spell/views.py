@@ -82,7 +82,13 @@ def spell_page(request):
 def spell_details(request, spell_id):
     spell = get_object_or_404(Spell, pk=spell_id)
     enhancements = Enhancement.objects.filter(related_spell=spell_id)
-    return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements})
+    is_homebrew = bool(True if spell.user.username != "eduardo_marques1" else False)
+    if is_homebrew:
+        if not request.user.is_authenticated:
+            return redirect('loginuser')
+        if request.user.is_authenticated and request.user.get_username() not in spell.shared_users:
+            return render(request, 'spell/access_denied.html')
+    return render(request, 'spell/spell_details.html', {'spell': spell, 'enhancements': enhancements, 'is_homebrew': is_homebrew})
 
 
 def create_spell(request):

@@ -124,10 +124,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Deploy config
-STATIC_ROOT = os.path.join(BASE_DIR / 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR / 'static')
 
 # Local config
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]  # add STATIC_ROOT to DIRS
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]  # add STATIC_ROOT to DIRS
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
