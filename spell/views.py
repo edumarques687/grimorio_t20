@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from spell.models import Spell, Enhancement, SpellForm
 from django.db.models import Q
 from grimoire.models import Grimoire
-# import unidecode
+import unidecode
 
 
 def spell_page(request):
@@ -17,7 +18,7 @@ def spell_page(request):
 
     if request.method == 'GET':
 
-        query = Q(user='1')
+        query = Q(user='248')
         if request.user.is_authenticated:
             query |= Q(user=request.user)
             query |= Q(shared_users__icontains=';' + request.user.get_username() + ';')
@@ -82,7 +83,7 @@ def spell_page(request):
 def spell_details(request, spell_id):
     spell = get_object_or_404(Spell, pk=spell_id)
     enhancements = Enhancement.objects.filter(related_spell=spell_id)
-    is_homebrew = bool(True if spell.user.username != "eduardo_marques1" else False)
+    is_homebrew = bool(True if spell.user.username != "GrimorioT20" else False)
     if is_homebrew:
         if not request.user.is_authenticated:
             return redirect('loginuser')
@@ -132,9 +133,19 @@ def remove_shared_spell(request, spell_id):
 
 
 
-# def copy_sorting_name(request):
-#     spells = Spell.objects.order_by('name').all()
-#     for spell in spells:
-#         spell.sorting_name = unidecode.unidecode(spell.name)
-#         spell.save()
-#     return render(request, 'homepage/home.html', {'response': 'sorting names copied'})
+def copy_sorting_name(request):
+    spells = Spell.objects.order_by('name').all()
+    for spell in spells:
+        spell.sorting_name = unidecode.unidecode(spell.name)
+        spell.save()
+    return render(request, 'homepage/home.html', {'response': 'sorting names copied'})
+
+def change_user(request):
+    spells = Spell.objects.order_by('name').all()
+    user_grimorio = User.objects.get(username='GrimorioT20')
+    for spell in spells:
+        if spell.user.username == 'eduardo_marques1':
+            spell.user = user_grimorio
+            spell.save()
+    return render(request, 'homepage/home.html', {'response': 'sorting names copied'})
+
