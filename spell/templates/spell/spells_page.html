@@ -152,6 +152,14 @@
                 display: inline-block;
             }
 
+            .parent {
+                display: inline-block;
+            }
+            .child {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
         </style>
 
 <div class="container-fluid" >
@@ -189,7 +197,7 @@
                             <input type="checkbox" id="AB" name="school1" value="AB" style="height:15px;width:15px;" {% if request.GET.school1 %} checked {% endif %}>
                             <label for="AB">Abjuração</label><br>
                             <input type="checkbox" id="AD" name="school2" value="AD" style="height:15px;width:15px;" {% if request.GET.school2 %} checked {% endif %}>
-                            <label for="AD">Advinhação</label><br>
+                            <label for="AD">Adivinhação</label><br>
                             <input type="checkbox" id="CO" name="school3" value="CO" style="height:15px;width:15px;" {% if request.GET.school3 %} checked {% endif %}>
                             <label for="CO">Convocação</label><br>
                             <input type="checkbox" id="EN" name="school4" value="EN" style="height:15px;width:15px;" {% if request.GET.school4 %} checked {% endif %}>
@@ -277,36 +285,65 @@
 
                         {% for c in circles %}
                         <br>
-                        <h2 style="font-size:270%">{{ c }}º círculo: </h2>
-                        <button type="button" class="dropdown-btn"><i class="arrow down"></i></button>
-                        <div class="dropdown-container">
-                            {% for spell in spells %}
-                            {% if spell.circle == c %}
+                        <div class='parent'>
+                            <h2 style="font-size:250%">
+                                {% if c == '1' %}
+                                    <div class='child'> {{ c }}º círculo:</div>
+                                {% else %}
+                                    <div class='child'>{{ c }}º círculo:</div>
+                                {% endif %}
+                              <div class='child' style="font-size:40%">
+                                    {% if c == '1' %}
+                                    <p>(1 PM)</p>
+                                    {% endif %}
 
-                            <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
-                                <h5>
-                                    {% if user.is_authenticated %}
-                                    {% if user_grimoires %}
-                                    <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:text-bottom">
+                                    {% if c == '2' %}
+                                    <p>(3 PM)</p>
                                     {% endif %}
+
+                                    {% if c == '3' %}
+                                    <p>(6 PM)</p>
                                     {% endif %}
-                                    {% if spell.school == 'AD'%}
-                                    {% with 'img/'|add:'divination.png' as path %}
-                                    <img src="{% static path %}" style="height:1em;vertical-align:sub">
-                                    {% endwith %}
-                                    {% else %}
-                                    {% with 'img/'|add:spell.school|add:'.png' as path %}
-                                    <img src="{% static path %}" style="height:1em;vertical-align:sub">
-                                    {% endwith %}
+
+                                    {% if c == '4' %}
+                                    <p>(10 PM)</p>
                                     {% endif %}
-                                    {% if spell.book_magazine == 'Homebrew' %}
-                                    (HB)
+
+                                    {% if c == '5' %}
+                                    <p>(15 PM)</p>
                                     {% endif %}
-                                    {{ spell.name }}
-                                </h5>
-                            </a>
-                            {% endif %}
-                            {% endfor %}
+                              </div>
+                            </h2>
+                            <button type="button" class="dropdown-btn"><i class="arrow down"></i></button>
+                            <div class="dropdown-container">
+                                {% for spell in spells %}
+                                {% if spell.circle == c %}
+
+                                <a href="{% url 'spell:spell_details' spell.id %}" style="text-decoration: none">
+                                    <h5>
+                                        {% if user.is_authenticated %}
+                                        {% if user_grimoires %}
+                                        <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:text-bottom">
+                                        {% endif %}
+                                        {% endif %}
+                                        {% if spell.school == 'AD'%}
+                                        {% with 'img/'|add:'divination.png' as path %}
+                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% endwith %}
+                                        {% else %}
+                                        {% with 'img/'|add:spell.school|add:'.png' as path %}
+                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% endwith %}
+                                        {% endif %}
+                                        {% if spell.book_magazine == 'Homebrew' %}
+                                        (HB)
+                                        {% endif %}
+                                        {{ spell.name }}
+                                    </h5>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                         {% endfor %}
 

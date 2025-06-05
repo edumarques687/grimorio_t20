@@ -25,5 +25,8 @@ urlpatterns = [
     path('<int:spell_id>/', views.spell_details, name='spell_details'),
     path('add_spell/<int:spell_id>/', views.add_shared_spell, name='add_shared_spell'),
     path('remove_spell/<int:spell_id>/', views.remove_shared_spell, name='remove_shared_spell'),
+    path('create_json/', views.create_json, name='create_json'),
+    # path('upload_spells/', views.upload_spells, name='upload_spells'),
+
     # path('create_spell/', views.create_spell, name='create_spell'),
 ]

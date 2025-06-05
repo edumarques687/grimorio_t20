@@ -4,7 +4,7 @@ from django.forms import ModelForm
 
 
 class Enhancement(models.Model):
-    cost = models.CharField(max_length=30)
+    cost = models.CharField(max_length=100)
     effect = models.TextField()
     related_spell = models.ForeignKey('Spell', on_delete=models.CASCADE, default=None)
 
@@ -31,7 +31,7 @@ class Spell(models.Model):
 
     SCHOOL_CHOICES = [
         ('AB', 'Abjuração'),
-        ('AD', 'Advinhação'),
+        ('AD', 'Adivinhação'),
         ('CO', 'Convocação'),
         ('EN', 'Encantamento'),
         ('EV', 'Evocação'),

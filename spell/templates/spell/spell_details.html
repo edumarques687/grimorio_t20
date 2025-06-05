@@ -134,7 +134,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6 bg_image" style="padding-top: 13px">
                     {% if is_homebrew %}
-                        <div class="titulo" style="margin: auto; width: 100%"><h1 style="text-align: center; color: #f0dc82;">Hombrew</h1></div>
+                        <div class="titulo" style="margin: auto; width: 100%"><h1 style="text-align: center; color: #f0dc82;">Homebrew</h1></div>
                     {% endif %}
                 </div>
                 <div class="col-md-3"></div>
@@ -169,16 +169,16 @@
 
                             </dd>
                             <dt>
-                                Duração:
-                            </dt>
-                            <dd>
-                                {{ spell.duration }}
-                            </dd>
-                            <dt>
                                 Alcance:
                             </dt>
                             <dd>
                                 {{ spell.range }}
+                            </dd>
+                            <dt>
+                                Duração:
+                            </dt>
+                            <dd>
+                                {{ spell.duration }}
                             </dd>
                             <dt>
                                 Alvo/Área/Efeito:
@@ -206,8 +206,8 @@
                     </div>
                 </div>
                 <div class="col-md-3 bg_image" style="padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
-                    <h1 style="text-align:center">
-                        {{spell.name}}
+                    <h1>
+                        <div style="text-align:center">{{spell.name}}</div>
                     </h1>
                     {% if spell.image %}
                     <img src="{{spell.image.url}}" style="max-width:100%;border-radius:3%">
