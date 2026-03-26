@@ -29,5 +29,7 @@ urlpatterns = [
     path('create_json/', views.create_json, name='create_json'),
     # path('upload_spells/', views.upload_spells, name='upload_spells'),
 
-    # path('create_spell/', views.create_spell, name='create_spell'),
+    path('create_spell/', views.create_spell, name='create_spell'),
+    path('edit_spell/<int:spell_id>/', views.edit_spell, name='edit_spell'),
+    path('delete_spell/<int:spell_id>/', views.delete_spell, name='delete_spell'),
 ]

@@ -50,6 +50,21 @@
                 vertical-align:text-bottom;
             }
 
+            .hb-badge {
+                display: inline-block;
+                font-family: 'iowanOldStyleBold';
+                font-size: 1em;
+                color: #f0dc82;
+                background-image: url("/static/img/hb.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                padding: 0.15em 0.4em;
+                vertical-align: baseline;
+                margin-right: 0.15em;
+                line-height: 1em;
+            }
+
             body {
                 background-image: url("/static/img/bg_2.jpg");
                 background-repeat: no-repeat;
@@ -96,6 +111,7 @@
                 cursor:pointer;
                 overflow: hidden;
                 outline:none;
+                vertical-align:middle;
             }
             .dropdown-container {
                 display: block;
@@ -108,6 +124,7 @@
                 display: inline-block;
                 align: center;
                 color: #d13235;
+                vertical-align: middle;
             }
             .down {
                 transform: rotate(45deg);
@@ -121,7 +138,7 @@
 
             .select{
                 border: 1px solid transparent;
-                padding: .5rem .75rem;
+                padding: .375rem .75rem;
                 font-family: 'iowanOldStyleRegular';
                 background-color:#3f0f12;
                 border-color:#3f0f12;
@@ -134,6 +151,7 @@
                 text-align: center;
                 text-decoration: none;
                 min-width: 8rem;
+                height: calc(1.5em + .75rem + 2px);
             }
 
             .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
@@ -184,6 +202,13 @@
                             <h3 style="text-align:left">
                                 Magias encontradas: {{ spells.count }}
                             </h3>
+                            {% if user.is_authenticated %}
+                            <div style="margin-top: 15px; margin-bottom: 15px;">
+                                <a href="{% url 'spell:create_spell' %}" class="btn btn-primary" style="width: 100%; text-align: center;">
+                                    <i class="fa-solid fa-feather" style="color: #f0dc82;"></i> Criar Nova Magia
+                                </a>
+                            </div>
+                            {% endif %}
                             <label class="bld"><b>Tipo: </b></label><br>
                             <input type="checkbox" id="Arcana" name="type1" value="AR" style="height:15px;width:15px;" {% if request.GET.type1 %} checked {% endif %}>
                             <label for="Arcana">Arcana</label><br>
@@ -233,8 +258,12 @@
                                 {% endfor %}
                             </select><br><br>
 
-                            <input type="submit" value="Filtrar magias" class="btn btn-primary">
-                            <button class="btn btn-primary" style="margin-left:10px" onclick="
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-6" style="padding-right: 5px;">
+                                    <input type="submit" value="Filtrar magias" class="btn btn-primary" style="width: 100%;">
+                                </div>
+                                <div class="col-6" style="padding-left: 5px;">
+                                    <button class="btn btn-primary" style="width: 100%;" onclick="
                                 document.getElementById('filter').reset();
 
                                 document.getElementById('Arcana').checked = false;
@@ -259,9 +288,13 @@
 
                                 return false;
                             ">
-                                Limpar filtros
-                            </button>
-                            <br>
+                                        Limpar filtros
+                                    </button>
+                                </div>
+                            </div>
+                            <a href="{% url 'spell:spells_page' %}?book_magazine=Homebrew&public_only=true" class="btn btn-primary" style="width: 100%; text-align: center; display: block;">
+                                <i class="fa-solid fa-magnifying-glass" style="color: #f0dc82;"></i> Explorar Magias Públicas Homebrew
+                            </a>
                         </form>
                     </div>
                 </div>
@@ -279,7 +312,9 @@
                             {% endfor %}
                         </select>
 
-                        <input type="submit" value="Adicionar magias" class="btn btn-primary"><br>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-plus" style="color: #f0dc82;"></i> Adicionar magias
+                        </button><br>
                         {% endif %}
                         {% endif %}
 
@@ -323,20 +358,20 @@
                                     <h5>
                                         {% if user.is_authenticated %}
                                         {% if user_grimoires %}
-                                        <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:text-bottom">
+                                        <input type="checkbox" name="spell{{spell.id}}" value={{spell.id}} style="height:18px;width:18px;vertical-align:middle">
                                         {% endif %}
                                         {% endif %}
                                         {% if spell.school == 'AD'%}
                                         {% with 'img/'|add:'divination.png' as path %}
-                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        <img src="{% static path %}" style="height:1em;vertical-align:middle">
                                         {% endwith %}
                                         {% else %}
                                         {% with 'img/'|add:spell.school|add:'.png' as path %}
-                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        <img src="{% static path %}" style="height:1em;vertical-align:middle">
                                         {% endwith %}
                                         {% endif %}
                                         {% if spell.book_magazine == 'Homebrew' %}
-                                        (HB)
+                                        <span class="hb-badge" title="Homebrew">HB</span>
                                         {% endif %}
                                         {{ spell.name }}
                                     </h5>

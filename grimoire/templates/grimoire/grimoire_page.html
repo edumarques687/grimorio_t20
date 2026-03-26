@@ -3,32 +3,6 @@
 {% load static %}
 
 <style>
-            @font-face {
-                font-family: 'tormenta20';
-                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
-                font-weight: normal;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'iowanOldStyleBold';
-                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
-                font-weight: normal;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'iowanOldStyleBoldItalic';
-                src: url('/static/styles/Fontes/Iowan Old Style Bold Italic.ttf') format('truetype');
-                font-weight: normal;
-                font-style: normal;
-            }
-
-            @font-face {
-                font-family: 'iowanOldStyleRegular';
-                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
-                font-weight: normal;
-                font-style: normal;
-            }
-
             h1 {
                 font-family: 'tormenta20';
                 font-weight: normal;
@@ -62,7 +36,7 @@
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
-                bacground-position: center;
+                background-position: center;
             }
 
             .bg_image {
@@ -70,7 +44,7 @@
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
-                bacground-position: center;
+                background-position: center;
             }
 
             .bld{
@@ -145,32 +119,4 @@
     </div>
 </div>
 
-<!--<div class="container-fluid">-->
-<!--    <div class="row text-center">-->
-<!--        <h1>{{ grimoire.name }}: {{ count }} magia{{ count|pluralize }}</h1>-->
-<!--    </div>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-3"></div>-->
-<!--        <div class="col-md-6 rounded" style="background-color:#F5F5F5">-->
-<!--            {% for c in circles %}-->
-<!--            <h2>{{ c }}º círculo: </h2>-->
-<!--            {% for spell in spell_list %}-->
-<!--            {% if spell.circle == c %}-->
-<!--            <form action="{% url 'grimoire:remove_spell' %}" method="POST">-->
-<!--                <input type="hidden" name="grimoire_id" value='{{ grimoire.id }}'>-->
-<!--                <input type="hidden" name="spell" value='{{ spell.id }}'>-->
-<!--                {% csrf_token %}-->
-<!--                <a href="{% url 'spell:spell_details' spell.id %}">-->
-<!--                    <h4><input type="submit" value="Remover" class="btn btn-danger" style="padding:0;height:25px;width:auto"> {{ spell.name }}</h4>-->
-<!--                </a>-->
-<!--                <p>{{ spell.short_description }}</p>-->
-<!--            </form>-->
-<!--            {% endif %}-->
-<!--            {% endfor %}-->
-<!--            {% endfor %}-->
-<!--        </div>-->
-<!--        <div class="col-md-3">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 {% endblock %}

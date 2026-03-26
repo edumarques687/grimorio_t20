@@ -14,5 +14,11 @@ class SpellAdmin(admin.ModelAdmin):
     ]
 
 
+class EnhancementAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'cost', 'related_spell']
+    list_filter = ['related_spell']
+    search_fields = ['cost', 'effect', 'related_spell__name']
+
+
 admin.site.register(Spell, SpellAdmin)
-admin.site.register(Enhancement)
+admin.site.register(Enhancement, EnhancementAdmin)

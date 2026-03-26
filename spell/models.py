@@ -70,9 +70,7 @@ class Spell(models.Model):
     book_magazine = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     shared_users = models.TextField(blank=True)
-
-    def id(self):
-        return self.id
+    public = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
