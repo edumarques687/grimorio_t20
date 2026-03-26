@@ -178,6 +178,18 @@
                 vertical-align: middle;
             }
 
+            .box {
+                display: table;
+                border: 20px solid black;
+                border-image: url("/static/img/box_2.png") 4% repeat;
+                background-color: #B6292E;
+                background-clip: padding-box, border-box;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left:10px;
+                padding-right:10px;
+            }
+
         </style>
 
 <div class="container-fluid" >
@@ -196,8 +208,8 @@
             <div class="row">
                 <div class="col-md-3"></div>
 
-                <div class="col-md-3 bg_image">
-                    <div class="col-md-12" style="display: table; background-color:#B62E34;padding-top: 15px;padding-bottom: 15px;padding-left:15px;padding-right:15px">
+                <div class="col-md-3 bg_image" style="padding-bottom: 15px;">
+                    <div class="col-md-12 box">
                         <form id="filter" action="{% url 'spell:spells_page' %}">
                             <h3 style="text-align:left">
                                 Magias encontradas: {{ spells.count }}

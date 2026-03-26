@@ -198,17 +198,17 @@
                                     {% with ";"|add:user.get_username|add:";" as username %}
                                         {% if username in spell.shared_users %}
                                             <div style="margin-top: 10px; margin-bottom: 10px;">
-                                                <a href="{% url 'spell:remove_shared_spell' spell.id %}" class="btn btn-primary" style="width: 100%;">❌ Remover da minha lista</a>
+                                                <a href="{% url 'spell:remove_shared_spell' spell.id %}" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-xmark" style="color: #f0dc82;"></i> Remover da minha lista</a>
                                             </div>
                                         {% else %}
                                             <div style="margin-top: 10px; margin-bottom: 10px;">
-                                                <a href="{% url 'spell:add_shared_spell' spell.id %}" class="btn btn-primary" style="width: 100%;">➕ Adicionar à minha lista</a>
+                                                <a href="{% url 'spell:add_shared_spell' spell.id %}" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-plus" style="color: #f0dc82;"></i> Adicionar à minha lista</a>
                                             </div>
                                         {% endif %}
                                     {% endwith %}
                                 {% else %}
                                     <div style="margin-top: 10px; margin-bottom: 10px;">
-                                        <button class="btn btn-primary" style="width: 100%; opacity: 0.5; cursor: not-allowed; background-color: #6b6b6b; border-color: #6b6b6b; color: #999;" disabled title="Você precisa estar logado para adicionar esta magia">➕ Adicionar à minha lista</button>
+                                        <button class="btn btn-primary" style="width: 100%; opacity: 0.5; cursor: not-allowed; background-color: #6b6b6b; border-color: #6b6b6b; color: #999;" disabled title="Você precisa estar logado para adicionar esta magia"><i class="fa-solid fa-plus" style="color: #999;"></i> Adicionar à minha lista</button>
                                         <p style="color: #f0dc82; font-size: 85%; text-align: center; margin-top: 5px; font-family: 'iowanOldStyleRegular';"><a href="{% url 'loginuser' %}" style="color: #f0dc82; text-decoration: underline;">Faça login</a> para adicionar</p>
                                     </div>
                                 {% endif %}

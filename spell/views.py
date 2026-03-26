@@ -223,8 +223,8 @@ def create_spell(request):
             range_val = sanitize_input(request.POST.get('range', ''))
             duration = sanitize_input(request.POST.get('duration', ''))
             resistance = sanitize_input(request.POST.get('resistance', ''))
-            # Description allows markdown
-            description = sanitize_input(request.POST.get('description', ''), allow_markdown=False)
+            # Description allows HTML tags
+            description = sanitize_input(request.POST.get('description', ''), allow_markdown=True)
             
             # Create the spell
             spell = Spell(
@@ -255,7 +255,7 @@ def create_spell(request):
                     break
                 
                 cost = sanitize_input(request.POST.get(cost_key, '').strip())
-                effect = sanitize_input(request.POST.get(effect_key, '').strip(), allow_markdown=False)
+                effect = sanitize_input(request.POST.get(effect_key, '').strip(), allow_markdown=True)
                 
                 # Only create enhancement if both cost and effect are provided
                 if cost and effect:
@@ -321,8 +321,8 @@ def edit_spell(request, spell_id):
             range_val = sanitize_input(request.POST.get('range', ''))
             duration = sanitize_input(request.POST.get('duration', ''))
             resistance = sanitize_input(request.POST.get('resistance', ''))
-            # Description allows markdown
-            description = sanitize_input(request.POST.get('description', ''), allow_markdown=False)
+            # Description allows HTML tags
+            description = sanitize_input(request.POST.get('description', ''), allow_markdown=True)
             
             # Update the spell
             spell.name = name
@@ -352,7 +352,7 @@ def edit_spell(request, spell_id):
                     break
                 
                 cost = sanitize_input(request.POST.get(cost_key, '').strip())
-                effect = sanitize_input(request.POST.get(effect_key, '').strip(), allow_markdown=False)
+                effect = sanitize_input(request.POST.get(effect_key, '').strip(), allow_markdown=True)
                 
                 if cost and effect:
                     enhancement = Enhancement(
