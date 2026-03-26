@@ -1,0 +1,454 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+
+<style>
+            @font-face {
+                font-family: 'tormenta20';
+                src: url('/static/styles/Fontes/Tormenta20.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleBold';
+                src: url('/static/styles/Fontes/Iowan Old Style Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'iowanOldStyleRegular';
+                src: url('/static/styles/Fontes/Iowan Old Style Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            h1 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align: center;
+                font-size: 350%;
+                margin-bottom: 30px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            }
+
+            h2 {
+                font-family: 'tormenta20';
+                font-weight: normal;
+                color: #d13235;
+                text-align: center;
+                font-size: 180%;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-family: 'iowanOldStyleBold';
+                color: #3f0f12;
+                font-size: 120%;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            body {
+                background-image: url("/static/img/bg_1.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .bg_image {
+                background-image: url("/static/img/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            }
+
+            .form-section {
+                background-color: rgba(255, 255, 255, 0.95);
+                padding: 25px;
+                border-radius: 8px;
+                margin-bottom: 25px;
+                border: 2px solid #d13235;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            .btn-primary {
+                font-family: 'iowanOldStyleRegular';
+                background-color: #3f0f12;
+                border-color: #3f0f12;
+                color: #f0dc82;
+                padding: 12px 30px;
+                font-size: 110%;
+                transition: all 0.3s ease;
+                border-radius: 6px;
+            }
+
+            .btn-primary:hover {
+                background-color: #5f1f22;
+                border-color: #f0dc82;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+
+            .btn-danger {
+                font-family: 'iowanOldStyleRegular';
+                background-color: #8b0000;
+                border-color: #8b0000;
+                color: #f0dc82;
+                padding: 10px 20px;
+                transition: all 0.3s ease;
+                border-radius: 6px;
+            }
+
+            .btn-danger:hover {
+                background-color: #a00000;
+                border-color: #f0dc82;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(139,0,0,0.3);
+            }
+
+            label {
+                font-family: 'iowanOldStyleBold';
+                color: #3f0f12;
+                font-weight: normal;
+                font-style: normal;
+                display: block;
+                margin-bottom: 8px;
+                font-size: 105%;
+            }
+
+            input[type="text"],
+            textarea,
+            select {
+                font-family: 'iowanOldStyleRegular';
+                width: 100%;
+                padding: 10px 15px;
+                border: 2px solid #d13235;
+                border-radius: 6px;
+                font-size: 100%;
+                transition: all 0.3s ease;
+                background-color: #fff;
+            }
+
+            input[type="text"]:focus,
+            textarea:focus,
+            select:focus {
+                outline: none;
+                border-color: #3f0f12;
+                box-shadow: 0 0 8px rgba(63, 15, 18, 0.2);
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+            .info-text {
+                font-family: 'iowanOldStyleRegular';
+                font-size: 90%;
+                margin-top: 8px;
+                margin-bottom: 0;
+                line-height: 1.5;
+            }
+
+            .warning-text {
+                color: #8b0000;
+            }
+
+            .info-text-primary {
+                color: #3f0f12;
+            }
+
+            .checkbox-label {
+                display: inline-block;
+                margin-left: 8px;
+            }
+
+            input[type="checkbox"] {
+                width: auto;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+                transform: scale(1.3);
+            }
+
+            .section-divider {
+                border: none;
+                border-top: 3px solid #d13235;
+                margin: 40px 0 30px 0;
+            }
+
+            .enhancement-group {
+                background-color: rgba(240, 220, 130, 0.1);
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                border: 1px solid #d13235;
+            }
+
+            .button-container {
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+
+            form {
+                text-align: left;
+            }
+        </style>
+
+<div class="container-fluid">
+    <div class="row" style="padding-top:30px"></div>
+    <div class="row">
+        <div class="col-md-2"> </div>
+        <div class="col-md-8 bg_image">
+            <h1><i class="fa-solid fa-pen-to-square" style="color: #d13235; margin-right: 15px;"></i>Editar Magia</h1>
+            {% if error %}
+            <h2>{{error}}</h2>
+            {% endif %}
+            
+            <form id="spell" method="POST">
+                {% csrf_token %}
+                
+                <div class="form-section">
+                    <h2 style="text-align: left; font-size: 150%; margin-top: 0;">Informações Básicas</h2>
+                    
+                    <div class="form-group">
+                        <label for="name"><i class="fa-solid fa-wand-magic-sparkles" style="color: #d13235; margin-right: 5px;"></i>Nome da magia:</label>
+                        <input type="text" id="name" name="name" value="{{ spell.name }}" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-book" style="color: #d13235; margin-right: 5px;"></i>Tipo:</label>
+                                <select name="spell_type:" required>
+                                    <option value="AR" {% if spell.spell_type == 'AR' %}selected{% endif %}>Arcana</option>
+                                    <option value="DI" {% if spell.spell_type == 'DI' %}selected{% endif %}>Divina</option>
+                                    <option value="UN" {% if spell.spell_type == 'UN' %}selected{% endif %}>Universal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-circle" style="color: #d13235; margin-right: 5px;"></i>Círculo:</label>
+                                <select name="circle:" required>
+                                    <option value="1" {% if spell.circle == '1' %}selected{% endif %}>1º</option>
+                                    <option value="2" {% if spell.circle == '2' %}selected{% endif %}>2º</option>
+                                    <option value="3" {% if spell.circle == '3' %}selected{% endif %}>3º</option>
+                                    <option value="4" {% if spell.circle == '4' %}selected{% endif %}>4º</option>
+                                    <option value="5" {% if spell.circle == '5' %}selected{% endif %}>5º</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-star" style="color: #d13235; margin-right: 5px;"></i>Escola:</label>
+                                <select name="school:" required>
+                                    <option value="AB" {% if spell.school == 'AB' %}selected{% endif %}>Abjuração</option>
+                                    <option value="AD" {% if spell.school == 'AD' %}selected{% endif %}>Adivinhação</option>
+                                    <option value="CO" {% if spell.school == 'CO' %}selected{% endif %}>Convocação</option>
+                                    <option value="EN" {% if spell.school == 'EN' %}selected{% endif %}>Encantamento</option>
+                                    <option value="EV" {% if spell.school == 'EV' %}selected{% endif %}>Evocação</option>
+                                    <option value="IL" {% if spell.school == 'IL' %}selected{% endif %}>Ilusão</option>
+                                    <option value="NE" {% if spell.school == 'NE' %}selected{% endif %}>Necromancia</option>
+                                    <option value="TR" {% if spell.school == 'TR' %}selected{% endif %}>Transmutação</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 style="text-align: left; font-size: 150%; margin-top: 0;">Características</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="execution"><i class="fa-solid fa-clock" style="color: #d13235; margin-right: 5px;"></i>Execução:</label>
+                                <input type="text" id="execution" name="execution" value="{{ spell.execution }}" placeholder="Ex: 1 ação padrão" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="range"><i class="fa-solid fa-location-arrow" style="color: #d13235; margin-right: 5px;"></i>Alcance:</label>
+                                <input type="text" id="range" name="range" value="{{ spell.range }}" placeholder="Ex: 9m" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="duration"><i class="fa-solid fa-hourglass-half" style="color: #d13235; margin-right: 5px;"></i>Duração:</label>
+                                <input type="text" id="duration" name="duration" value="{{ spell.duration }}" placeholder="Ex: Instantânea" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="resistance"><i class="fa-solid fa-shield" style="color: #d13235; margin-right: 5px;"></i>Resistência:</label>
+                                <input type="text" id="resistance" name="resistance" value="{{ spell.resistance }}" placeholder="Ex: Vontade anula">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 style="text-align: left; font-size: 150%; margin-top: 0;">Descrição</h2>
+                    
+                    <div class="form-group">
+                        <label for="description"><i class="fa-solid fa-scroll" style="color: #d13235; margin-right: 5px;"></i>Descrição completa:</label>
+                        <textarea id="description" name="description" rows="6" placeholder="Descreva os efeitos da magia..." required>{{ spell.description }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 style="text-align: left; font-size: 150%; margin-top: 0;"><i class="fa-solid fa-share-nodes" style="color: #d13235; margin-right: 10px;"></i>Compartilhamento</h2>
+                    
+                    <div class="form-group">
+                        <label for="shared_users"><i class="fa-solid fa-users" style="color: #d13235; margin-right: 5px;"></i>Usuários com acesso (opcional):</label>
+                        <input type="text" id="shared_users" name="shared_users" value="{{ shared_users_display }}" placeholder="usuario1, usuario2, usuario3">
+                        <p class="info-text warning-text">
+                            <i class="fa-solid fa-triangle-exclamation"></i> <strong>Atenção:</strong> Digite os nomes de usuário exatamente como estão cadastrados, separados por vírgulas. Usuários inválidos serão ignorados.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="public" name="public" {% if spell.public %}checked{% endif %}>
+                            <span class="checkbox-label"><i class="fa-solid fa-globe" style="color: #d13235; margin-right: 5px;"></i>Tornar esta magia pública</span>
+                        </label>
+                        <p class="info-text info-text-primary" style="margin-left: 30px;">
+                            <i class="fa-solid fa-info-circle"></i> Qualquer usuário com o link poderá acessar esta magia
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="section-divider">
+                
+                <h2 style="text-align: center;"><i class="fa-solid fa-arrow-up-right-dots" style="color: #d13235; margin-right: 10px;"></i>Aprimoramentos</h2>
+                
+                <div id="enhancements-container">
+                    {% for enhancement in enhancements %}
+                    <div class="enhancement-group" data-enhancement-index="{{ forloop.counter0 }}">
+                        <h3><i class="fa-solid fa-plus-circle" style="color: #3f0f12; margin-right: 8px;"></i>Aprimoramento {{ forloop.counter }}</h3>
+                        <input type="hidden" name="enhancement_id_{{ forloop.counter0 }}" value="{{ enhancement.id }}">
+                        
+                        <div class="form-group">
+                            <label for="enhancement_cost_{{ forloop.counter0 }}">Custo:</label>
+                            <input type="text" id="enhancement_cost_{{ forloop.counter0 }}" name="enhancement_cost_{{ forloop.counter0 }}" value="{{ enhancement.cost }}" placeholder="Ex: +2 PM">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="enhancement_effect_{{ forloop.counter0 }}">Efeito:</label>
+                            <textarea id="enhancement_effect_{{ forloop.counter0 }}" name="enhancement_effect_{{ forloop.counter0 }}" rows="3" placeholder="Descreva o efeito do aprimoramento...">{{ enhancement.effect }}</textarea>
+                        </div>
+                        
+                        {% if not forloop.first %}
+                        <button type="button" class="btn btn-danger remove-enhancement-btn" data-index="{{ forloop.counter0 }}">
+                            <i class="fa-solid fa-trash"></i> Remover Este Aprimoramento
+                        </button>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    
+                    {% if not enhancements %}
+                    <div class="enhancement-group" data-enhancement-index="0">
+                        <h3><i class="fa-solid fa-plus-circle" style="color: #3f0f12; margin-right: 8px;"></i>Aprimoramento 1</h3>
+                        
+                        <div class="form-group">
+                            <label for="enhancement_cost_0">Custo:</label>
+                            <input type="text" id="enhancement_cost_0" name="enhancement_cost_0" placeholder="Ex: +2 PM">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="enhancement_effect_0">Efeito:</label>
+                            <textarea id="enhancement_effect_0" name="enhancement_effect_0" rows="3" placeholder="Descreva o efeito do aprimoramento..."></textarea>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="button-container">
+                    <button type="button" id="add-enhancement-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-plus"></i> Adicionar Outro Aprimoramento
+                    </button>
+                </div>
+
+                <hr class="section-divider">
+
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary" style="font-size: 120%; padding: 15px 50px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Salvar Alterações
+                    </button>
+                </div>
+            </form>
+            <div class="row" style="padding-top:30px"></div>
+        </div>
+        <div class="col-md-2"> </div>
+    </div>
+</div>
+
+<script>
+let enhancementCount = {{ enhancements|length|default:1 }};
+
+document.getElementById('add-enhancement-btn').addEventListener('click', function() {
+    const container = document.getElementById('enhancements-container');
+    const newIndex = enhancementCount;
+    
+    const enhancementHTML = `
+        <div class="enhancement-group" data-enhancement-index="${newIndex}">
+            <h3><i class="fa-solid fa-plus-circle" style="color: #3f0f12; margin-right: 8px;"></i>Aprimoramento ${newIndex + 1}</h3>
+            
+            <div class="form-group">
+                <label for="enhancement_cost_${newIndex}">Custo:</label>
+                <input type="text" id="enhancement_cost_${newIndex}" name="enhancement_cost_${newIndex}" placeholder="Ex: +2 PM">
+            </div>
+            
+            <div class="form-group">
+                <label for="enhancement_effect_${newIndex}">Efeito:</label>
+                <textarea id="enhancement_effect_${newIndex}" name="enhancement_effect_${newIndex}" rows="3" placeholder="Descreva o efeito do aprimoramento..."></textarea>
+            </div>
+            
+            <button type="button" class="btn btn-danger remove-enhancement-btn" data-index="${newIndex}">
+                <i class="fa-solid fa-trash"></i> Remover Este Aprimoramento
+            </button>
+        </div>
+    `;
+    
+    container.insertAdjacentHTML('beforeend', enhancementHTML);
+    enhancementCount++;
+    
+    // Add event listener to the new remove button
+    const removeButtons = document.querySelectorAll('.remove-enhancement-btn');
+    removeButtons[removeButtons.length - 1].addEventListener('click', function() {
+        const index = this.getAttribute('data-index');
+        const groupToRemove = document.querySelector(`.enhancement-group[data-enhancement-index="${index}"]`);
+        if (groupToRemove) {
+            groupToRemove.remove();
+        }
+    });
+});
+
+// Add event listeners to existing remove buttons
+document.querySelectorAll('.remove-enhancement-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = this.getAttribute('data-index');
+        const groupToRemove = document.querySelector(`.enhancement-group[data-enhancement-index="${index}"]`);
+        if (groupToRemove) {
+            groupToRemove.remove();
+        }
+    });
+});
+</script>
+
+{% endblock %}

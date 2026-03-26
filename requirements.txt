@@ -1,0 +1,27 @@
+# Core Django Framework
+Django==3.1.5
+
+# ASGI server support
+asgiref==3.11.1
+
+# Image processing
+Pillow==12.1.1
+
+# Database utilities
+sqlparse==0.5.5
+
+# Timezone support
+pytz==2026.1.post1
+
+# Security - Input sanitization and HTML cleaning
+bleach==6.3.0
+webencodings==0.5.1
+
+# Markdown support for rich text formatting
+Markdown==3.10.2
+
+# Legacy CGI support
+legacy-cgi==2.6.4
+
+# Build tools
+setuptools==82.0.1
