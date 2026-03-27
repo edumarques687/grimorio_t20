@@ -221,6 +221,7 @@ def create_spell(request):
             name = sanitize_input(request.POST.get('name', ''))
             execution = sanitize_input(request.POST.get('execution', ''))
             range_val = sanitize_input(request.POST.get('range', ''))
+            target_area_effect = sanitize_input(request.POST.get('target_area_effect', ''))
             duration = sanitize_input(request.POST.get('duration', ''))
             resistance = sanitize_input(request.POST.get('resistance', ''))
             # Description allows HTML tags
@@ -235,6 +236,7 @@ def create_spell(request):
                 school=request.POST.get('school:', 'AB'),
                 execution=execution,
                 range=range_val,
+                target_area_effect=target_area_effect,
                 duration=duration,
                 resistance=resistance,
                 description=description,
@@ -319,6 +321,7 @@ def edit_spell(request, spell_id):
             name = sanitize_input(request.POST.get('name', ''))
             execution = sanitize_input(request.POST.get('execution', ''))
             range_val = sanitize_input(request.POST.get('range', ''))
+            target_area_effect = sanitize_input(request.POST.get('target_area_effect', ''))
             duration = sanitize_input(request.POST.get('duration', ''))
             resistance = sanitize_input(request.POST.get('resistance', ''))
             # Description allows HTML tags
@@ -332,6 +335,7 @@ def edit_spell(request, spell_id):
             spell.school = request.POST.get('school:', 'AB')
             spell.execution = execution
             spell.range = range_val
+            spell.target_area_effect = target_area_effect
             spell.duration = duration
             spell.resistance = resistance
             spell.description = description
