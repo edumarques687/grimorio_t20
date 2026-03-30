@@ -181,6 +181,10 @@ def spell_details(request, spell_id):
         if spell.public:
             return render(request, 'spell/spell_details.html', {'spell': spell,
                                                                 'enhancements': enhancements, 'is_homebrew': is_homebrew})
+        # Allow access for eduardo_marques1 even if spell is not public
+        if request.user.is_authenticated and request.user.get_username() == 'eduardo_marques1':
+            return render(request, 'spell/spell_details.html', {'spell': spell,
+                                                                'enhancements': enhancements, 'is_homebrew': is_homebrew})
         # Otherwise require authentication and shared access
         if not request.user.is_authenticated:
             return redirect('loginuser')
