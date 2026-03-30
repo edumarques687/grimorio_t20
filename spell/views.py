@@ -103,7 +103,11 @@ def spell_page(request):
         
         # Check if filtering for public homebrew spells only
         if request.GET.get('public_only') == 'true':
-            query |= Q(public=True, book_magazine='Homebrew')
+            # Show all homebrew spells (public and non-public) if user is eduardo_marques1
+            if request.user.is_authenticated and request.user.get_username() == 'eduardo_marques1':
+                query |= Q(book_magazine='Homebrew')
+            else:
+                query |= Q(public=True, book_magazine='Homebrew')
         
         spells = Spell.objects.filter(query).order_by('sorting_name')
 
