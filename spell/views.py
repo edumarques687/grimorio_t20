@@ -150,20 +150,45 @@ def spell_page(request):
                     query &= Q(target_area_effect__icontains=value)
                 if key == 'resistance' and value != '':
                     query &= Q(resistance__icontains=value)
-                if key == 'book_magazine' and value != '':
-                    query &= Q(book_magazine__icontains=value)
+        
+        # Handle multiple book_magazine selections
+        selected_books = request.GET.getlist('book_magazine')
+        if selected_books:
+            book_query = Q()
+            for book in selected_books:
+                if book:
+                    book_query |= Q(book_magazine__icontains=book)
+            query &= book_query
 
         spells = spells.filter(query).order_by('sorting_name').distinct()
+        
+        # Get all available book_magazine values from ALL spells the user can access
+        # (not just filtered results)
+        all_accessible_query = Q(user='248')
+        if request.user.is_authenticated:
+            all_accessible_query |= Q(user=request.user)
+            all_accessible_query |= Q(shared_users__icontains=';' + request.user.get_username() + ';')
+        
+        # Check if filtering for public homebrew spells only
+        if request.GET.get('public_only') == 'true':
+            if request.user.is_authenticated and request.user.get_username() == 'eduardo_marques1':
+                all_accessible_query |= Q(book_magazine='Homebrew')
+            else:
+                all_accessible_query |= Q(public=True, book_magazine='Homebrew')
+        
+        all_accessible_spells = Spell.objects.filter(all_accessible_query)
         origins = []
-        for spell in spells:
+        for spell in all_accessible_spells:
             spell_origin = spell.book_magazine
             if spell_origin not in origins:
                 origins.append(spell_origin)
+        origins.sort()  # Sort alphabetically for better UX
 
         return render(request, 'spell/spells_page.html', {'spells': spells,
                                                           'circles': ['1', '2', '3', '4', '5'],
                                                           'user_grimoires': user_grimoires,
                                                           'origins': origins,
+                                                          'selected_books': selected_books,
                                                           'rip': rip,
                                                           })
 

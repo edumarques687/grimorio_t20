@@ -185,6 +185,105 @@
                 border-color: #d13235;
             }
 
+            /* Custom dropdown with checkboxes */
+            .custom-dropdown {
+                position: relative;
+                display: block;
+                width: 100%;
+            }
+
+            .dropdown-header {
+                font-family: 'iowanOldStyleRegular';
+                background-color: #3f0f12;
+                border: 2px solid #f0dc82;
+                border-radius: 4px;
+                color: #f0dc82;
+                padding: 6px 10px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                min-height: 38px;
+            }
+            
+            .dropdown-header span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                flex: 1;
+                margin-right: 8px;
+            }
+
+            .dropdown-header:hover {
+                border-color: #d13235;
+            }
+
+            .dropdown-header.open {
+                border-color: #d13235;
+                box-shadow: 0 0 8px rgba(209, 50, 53, 0.4);
+            }
+
+            .dropdown-arrow {
+                border: solid #f0dc82;
+                border-width: 0 2px 2px 0;
+                padding: 3px;
+                transform: rotate(45deg);
+                transition: transform 0.2s ease;
+            }
+
+            .dropdown-header.open .dropdown-arrow {
+                transform: rotate(-135deg);
+            }
+
+            .dropdown-list {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #3f0f12;
+                border: 2px solid #d13235;
+                border-top: none;
+                border-radius: 0 0 4px 4px;
+                max-height: 200px;
+                overflow-y: auto;
+                z-index: 1000;
+                margin-top: -2px;
+            }
+
+            .dropdown-list.show {
+                display: block;
+            }
+
+            .dropdown-item {
+                padding: 6px 10px;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                display: flex;
+                align-items: center;
+                min-height: 32px;
+            }
+
+            .dropdown-item:hover {
+                background-color: #4a1215;
+            }
+
+            .dropdown-item input[type="checkbox"] {
+                margin-right: 8px;
+                flex-shrink: 0;
+            }
+
+            .dropdown-item label {
+                cursor: pointer;
+                margin: 0;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: break-word;
+            }
+
             .dropdown-btn{
                 background-color:Transparent;
                 background-repeat:no-repeat;
@@ -343,13 +442,27 @@
                             <label class="bld" for="resistance">Resistência: </label>
                             <input type="text" id="resistance" name="resistance" style="display:table-cell; width:100%"{% if request.GET.resistance %} value="{{request.GET.resistance}}" {% endif %}><br>
 
-                            <label class="bld" >Publicação: </label>
-                            <select name="book_magazine" style="display:table-cell; width:100%">
-                                <option value="" {% if not request.GET.book_magazine %}selected="selected"{% endif %}>Todas</option>
-                                {% for origin in origins %}
-                                <option value="{{origin}}" {% if request.GET.book_magazine == origin %}selected="selected"{% endif %}>{{origin}}</option>
-                                {% endfor %}
-                            </select><br><br>
+                            <label class="bld">Publicação:</label>
+                            <div class="custom-dropdown">
+                                <div class="dropdown-header" id="bookDropdownHeader" onclick="toggleBookDropdown()">
+                                    <span id="bookDropdownText">Todas</span>
+                                    <i class="dropdown-arrow"></i>
+                                </div>
+                                <div class="dropdown-list" id="bookDropdownList">
+                                    {% for origin in origins %}
+                                    <div class="dropdown-item" onclick="event.stopPropagation();">
+                                        <input type="checkbox" 
+                                               id="book_{{ forloop.counter }}" 
+                                               name="book_magazine" 
+                                               value="{{origin}}" 
+                                               {% if origin in selected_books %}checked{% endif %}
+                                               onchange="updateBookDropdownText()">
+                                        <label for="book_{{ forloop.counter }}">{{origin}}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <br><br>
 
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-6" style="padding-right: 5px;">
@@ -358,31 +471,7 @@
                                     </button>
                                 </div>
                                 <div class="col-6" style="padding-left: 5px;">
-                                    <button type="button" class="btn btn-primary" style="width: 100%;" onclick="
-                                document.getElementById('filter').reset();
-
-                                document.getElementById('Arcana').checked = false;
-                                document.getElementById('Divina').checked = false;
-                                document.getElementById('Universal').checked = false;
-
-                                document.getElementById('AB').checked = false;
-                                document.getElementById('AD').checked = false;
-                                document.getElementById('CO').checked = false;
-                                document.getElementById('EN').checked = false;
-                                document.getElementById('EV').checked = false;
-                                document.getElementById('IL').checked = false;
-                                document.getElementById('NE').checked = false;
-                                document.getElementById('TR').checked = false;
-
-                                document.getElementById('keyword').value = null;
-                                document.getElementById('execution').value = null;
-                                document.getElementById('duration').value = null;
-                                document.getElementById('range').value = null;
-                                document.getElementById('target_area_effect').value = null;
-                                document.getElementById('resistance').value = null;
-
-                                return false;
-                            ">
+                                    <button type="button" class="btn btn-primary" style="width: 100%;" onclick="clearAllFilters()">
                                         Limpar filtros
                                     </button>
                                 </div>
@@ -500,6 +589,84 @@ for (i = 0; i < dropdown.length; i++) {
     }
   });
 }
+
+// Custom dropdown functionality
+function toggleBookDropdown() {
+    var header = document.getElementById('bookDropdownHeader');
+    var list = document.getElementById('bookDropdownList');
+    header.classList.toggle('open');
+    list.classList.toggle('show');
+}
+
+function updateBookDropdownText() {
+    var checkboxes = document.querySelectorAll('#bookDropdownList input[type="checkbox"]');
+    var selectedBooks = [];
+    
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            selectedBooks.push(checkbox.nextElementSibling.textContent);
+        }
+    });
+    
+    var text = selectedBooks.length === 0 ? 'Todas' : 
+               selectedBooks.length === 1 ? selectedBooks[0] : 
+               selectedBooks.length + ' selecionadas';
+    
+    document.getElementById('bookDropdownText').textContent = text;
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    var dropdown = document.querySelector('.custom-dropdown');
+    var header = document.getElementById('bookDropdownHeader');
+    var list = document.getElementById('bookDropdownList');
+    
+    if (dropdown && !dropdown.contains(event.target)) {
+        header.classList.remove('open');
+        list.classList.remove('show');
+    }
+});
+
+// Clear all filters function
+function clearAllFilters() {
+    document.getElementById('filter').reset();
+    
+    // Clear all checkboxes
+    document.getElementById('Arcana').checked = false;
+    document.getElementById('Divina').checked = false;
+    document.getElementById('Universal').checked = false;
+    
+    document.getElementById('AB').checked = false;
+    document.getElementById('AD').checked = false;
+    document.getElementById('CO').checked = false;
+    document.getElementById('EN').checked = false;
+    document.getElementById('EV').checked = false;
+    document.getElementById('IL').checked = false;
+    document.getElementById('NE').checked = false;
+    document.getElementById('TR').checked = false;
+    
+    // Clear text inputs
+    document.getElementById('keyword').value = '';
+    document.getElementById('execution').value = '';
+    document.getElementById('duration').value = '';
+    document.getElementById('range').value = '';
+    document.getElementById('target_area_effect').value = '';
+    document.getElementById('resistance').value = '';
+    
+    // Clear book dropdown checkboxes
+    var bookCheckboxes = document.querySelectorAll('#bookDropdownList input[type="checkbox"]');
+    bookCheckboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+    updateBookDropdownText();
+    
+    return false;
+}
+
+// Initialize dropdown text on page load
+window.addEventListener('DOMContentLoaded', function() {
+    updateBookDropdownText();
+});
 </script>
 
 
