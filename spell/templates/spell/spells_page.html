@@ -98,10 +98,91 @@
             }
 
             .btn-primary{
-            font-family: 'iowanOldStyleRegular';
+                font-family: 'iowanOldStyleRegular';
                 background-color:#3f0f12;
                 border-color:#3f0f12;
                 color:#f0dc82;
+            }
+
+            /* Custom checkbox styling */
+            input[type="checkbox"] {
+                appearance: none;
+                -webkit-appearance: none;
+                width: 18px;
+                height: 18px;
+                border: 2px solid #f0dc82;
+                border-radius: 3px;
+                background-color: #3f0f12;
+                cursor: pointer;
+                position: relative;
+                vertical-align: middle;
+                margin-right: 8px;
+                transition: all 0.2s ease;
+            }
+
+            input[type="checkbox"]:hover {
+                border-color: #d13235;
+                box-shadow: 0 0 5px rgba(240, 220, 130, 0.3);
+            }
+
+            input[type="checkbox"]:checked {
+                background-color: #d13235;
+                border-color: #f0dc82;
+            }
+
+            input[type="checkbox"]:checked::after {
+                content: "✓";
+                position: absolute;
+                color: #f0dc82;
+                font-size: 14px;
+                font-weight: bold;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* Custom text input styling */
+            input[type="text"] {
+                font-family: 'iowanOldStyleRegular';
+                background-color: #3f0f12;
+                border: 2px solid #f0dc82;
+                border-radius: 4px;
+                color: #f0dc82;
+                padding: 6px 10px;
+                transition: all 0.2s ease;
+            }
+
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #d13235;
+                box-shadow: 0 0 8px rgba(209, 50, 53, 0.4);
+                background-color: #4a1215;
+            }
+
+            input[type="text"]::placeholder {
+                color: rgba(240, 220, 130, 0.5);
+            }
+
+            /* Custom select styling */
+            select {
+                font-family: 'iowanOldStyleRegular';
+                background-color: #3f0f12;
+                border: 2px solid #f0dc82;
+                border-radius: 4px;
+                color: #f0dc82;
+                padding: 6px 10px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            select:focus {
+                outline: none;
+                border-color: #d13235;
+                box-shadow: 0 0 8px rgba(209, 50, 53, 0.4);
+            }
+
+            select:hover {
+                border-color: #d13235;
             }
 
             .dropdown-btn{
@@ -222,30 +303,30 @@
                             </div>
                             {% endif %}
                             <label class="bld"><b>Tipo: </b></label><br>
-                            <input type="checkbox" id="Arcana" name="type1" value="AR" style="height:15px;width:15px;" {% if request.GET.type1 %} checked {% endif %}>
+                            <input type="checkbox" id="Arcana" name="type1" value="AR" {% if request.GET.type1 %} checked {% endif %}>
                             <label for="Arcana">Arcana</label><br>
-                            <input type="checkbox" id="Divina" name="type2" value="DI" style="height:15px;width:15px;" {% if request.GET.type2 %} checked {% endif %}>
+                            <input type="checkbox" id="Divina" name="type2" value="DI" {% if request.GET.type2 %} checked {% endif %}>
                             <label for="Divina">Divina</label><br>
-                            <input type="checkbox" id="Universal" name="type3" value="UN" style="height:15px;width:15px;" {% if request.GET.type3 %} checked {% endif %}>
+                            <input type="checkbox" id="Universal" name="type3" value="UN" {% if request.GET.type3 %} checked {% endif %}>
                             <label for="Universal">Universal</label><br>
                             <br>
 
                             <label class="bld"><b>Escola: </b></label><br>
-                            <input type="checkbox" id="AB" name="school1" value="AB" style="height:15px;width:15px;" {% if request.GET.school1 %} checked {% endif %}>
+                            <input type="checkbox" id="AB" name="school1" value="AB" {% if request.GET.school1 %} checked {% endif %}>
                             <label for="AB">Abjuração</label><br>
-                            <input type="checkbox" id="AD" name="school2" value="AD" style="height:15px;width:15px;" {% if request.GET.school2 %} checked {% endif %}>
+                            <input type="checkbox" id="AD" name="school2" value="AD" {% if request.GET.school2 %} checked {% endif %}>
                             <label for="AD">Adivinhação</label><br>
-                            <input type="checkbox" id="CO" name="school3" value="CO" style="height:15px;width:15px;" {% if request.GET.school3 %} checked {% endif %}>
+                            <input type="checkbox" id="CO" name="school3" value="CO" {% if request.GET.school3 %} checked {% endif %}>
                             <label for="CO">Convocação</label><br>
-                            <input type="checkbox" id="EN" name="school4" value="EN" style="height:15px;width:15px;" {% if request.GET.school4 %} checked {% endif %}>
+                            <input type="checkbox" id="EN" name="school4" value="EN" {% if request.GET.school4 %} checked {% endif %}>
                             <label for="EN">Encantamento</label><br>
-                            <input type="checkbox" id="EV" name="school5" value="EV" style="height:15px;width:15px;" {% if request.GET.school5 %} checked {% endif %}>
+                            <input type="checkbox" id="EV" name="school5" value="EV" {% if request.GET.school5 %} checked {% endif %}>
                             <label for="EV">Evocação</label><br>
-                            <input type="checkbox" id="IL" name="school6" value="IL" style="height:15px;width:15px;" {% if request.GET.school6 %} checked {% endif %}>
+                            <input type="checkbox" id="IL" name="school6" value="IL" {% if request.GET.school6 %} checked {% endif %}>
                             <label for="IL">Ilusão</label><br>
-                            <input type="checkbox" id="NE" name="school7" value="NE" style="height:15px;width:15px;" {% if request.GET.school7 %} checked {% endif %}>
+                            <input type="checkbox" id="NE" name="school7" value="NE" {% if request.GET.school7 %} checked {% endif %}>
                             <label for="NE">Necromancia</label><br>
-                            <input type="checkbox" id="TR" name="school8" value="TR" style="height:15px;width:15px;" {% if request.GET.school8 %} checked {% endif %}>
+                            <input type="checkbox" id="TR" name="school8" value="TR" {% if request.GET.school8 %} checked {% endif %}>
                             <label for="TR">Transmutação</label><br>
                             <br>
 
