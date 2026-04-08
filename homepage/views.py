@@ -43,6 +43,3 @@ def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return render(request, 'homepage/home.html')
-
-def help(request):
-    return render(request, 'homepage/help.html')
