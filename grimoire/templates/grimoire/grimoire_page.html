@@ -56,6 +56,10 @@
                 font-variant: small-caps;
             }
 
+            .school-icon-black {
+                filter: brightness(0);
+            }
+
             label{
                 font-family: 'iowanOldStyleRegular';
                 color: white;
@@ -97,12 +101,12 @@
                                     <h4>
                                         <input type="submit" value="Remov." class="btn btn-primary" style="padding:0;height:25px;width:auto">
                                         {% if spell.school == 'AD'%}
-                                        {% with 'img/black_'|add:'divination.png' as path %}
-                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% with 'img/'|add:'divination.png' as path %}
+                                        <img src="{% static path %}" class="school-icon-black" style="height:1em;vertical-align:sub">
                                         {% endwith %}
                                         {% else %}
-                                        {% with 'img/black_'|add:spell.school|add:'.png' as path %}
-                                        <img src="{% static path %}" style="height:1em;vertical-align:sub">
+                                        {% with 'img/'|add:spell.school|add:'.png' as path %}
+                                        <img src="{% static path %}" class="school-icon-black" style="height:1em;vertical-align:sub">
                                         {% endwith %}
                                         {% endif %}
                                         {{ spell.name }}
