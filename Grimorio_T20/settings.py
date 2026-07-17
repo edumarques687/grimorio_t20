@@ -50,7 +50,10 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # XFrameOptionsMiddleware removed to allow the site to be embedded in an iframe.
+    # Framing is instead governed by the Content-Security-Policy frame-ancestors
+    # header set in AllowIframeEmbedMiddleware below.
+    'Grimorio_T20.middleware.AllowIframeEmbedMiddleware',
 ]
 
 ROOT_URLCONF = 'Grimorio_T20.urls'
